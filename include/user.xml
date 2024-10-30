@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet href="file:///C|/Spiele/GTA San Andreas Multiplayer/Server - ZAW Reallife/qawno/xml/pawndoc.xsl" type="text/xsl"?>
+<doc source="C:\Spiele\GTA San Andreas Multiplayer\Server - ZAW Reallife\qawno\include\user.inc">
+	<assembly>
+		<name>user.inc</name>
+	</assembly>
+	<members>
+
+		<!-- enumerations -->
+
+		<!-- constants -->
+		<member name="C:false" value="0">
+			<tagname value="bool"/>
+			<referrer name="wait_kh"/>
+			<referrer name="login_response"/>
+			<referrer name="spawn_player"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="C:true" value="1">
+			<tagname value="bool"/>
+			<referrer name="wait_kh"/>
+			<referrer name="login_response"/>
+			<referrer name="dologin"/>
+			<referrer name="payday"/>
+		</member>
+
+		<!-- variables -->
+		<member name="F:__date">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__time">
+		</member>
+		<member name="F:angerufener">
+			<referrer name="login_response"/>
+			<referrer name="dologin"/>
+			<referrer name="actionmenu"/>
+			<referrer name="handyauflegen"/>
+		</member>
+		<member name="F:anrufender">
+			<referrer name="login_response"/>
+			<referrer name="dologin"/>
+			<referrer name="actionmenu"/>
+			<referrer name="handyauflegen"/>
+		</member>
+		<member name="F:aufstiegsarray">
+			<referrer name="skilllevelcheck"/>
+			<referrer name="usertextdrawupdate"/>
+		</member>
+		<member name="F:berufserf">
+			<tagname value="Text"/>
+		</member>
+		<member name="F:berufserf1">
+			<tagname value="Text"/>
+			<referrer name="usertextdrawupdate"/>
+		</member>
+		<member name="F:berufserf2">
+			<tagname value="Text"/>
+			<referrer name="usertextdrawupdate"/>
+		</member>
+		<member name="F:handytimer">
+			<referrer name="login_response"/>
+		</member>
+		<member name="F:hospital_cam">
+			<tagname value="Float"/>
+			<referrer name="wait_kh"/>
+		</member>
+		<member name="F:hospital_spawn">
+			<tagname value="Float"/>
+			<referrer name="wait_kh"/>
+		</member>
+		<member name="F:mietwagen">
+			<tagname value="Float"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="F:mietwagen_alive">
+			<tagname value="bool"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="F:navivar">
+		</member>
+		<member name="F:paydaydraw1">
+			<tagname value="Text"/>
+			<referrer name="usertextdrawupdate"/>
+		</member>
+		<member name="F:paydaydraw2">
+			<tagname value="Text"/>
+			<referrer name="usertextdrawupdate"/>
+		</member>
+		<member name="F:paydaytimer">
+			<referrer name="dologin"/>
+		</member>
+		<member name="F:playerdata">
+			<referrer name="login_response"/>
+			<referrer name="dologin"/>
+			<referrer name="spawn_player"/>
+			<referrer name="dologout"/>
+			<referrer name="setuserlizens"/>
+			<referrer name="giveusermoney"/>
+			<referrer name="setuserjob"/>
+			<referrer name="payday"/>
+			<referrer name="skilllevelcheck"/>
+			<referrer name="actionmenu"/>
+			<referrer name="jobaction"/>
+			<referrer name="user_stats"/>
+			<referrer name="usertextdrawupdate"/>
+		</member>
+		<member name="F:playerinhouse">
+			<referrer name="dologin"/>
+			<referrer name="dologout"/>
+		</member>
+		<member name="F:playerinshop">
+			<referrer name="dologin"/>
+		</member>
+		<member name="F:taxiguest">
+			<referrer name="login_response"/>
+		</member>
+		<member name="F:toroeffner">
+			<referrer name="dologin"/>
+		</member>
+		<member name="F:userlevel">
+			<tagname value="Text"/>
+		</member>
+		<member name="F:userleveldraw1">
+			<tagname value="Text"/>
+			<referrer name="usertextdrawupdate"/>
+		</member>
+		<member name="F:userleveldraw2">
+			<tagname value="Text"/>
+			<referrer name="usertextdrawupdate"/>
+		</member>
+		<member name="F:zahltag">
+			<tagname value="Text"/>
+		</member>
+
+		<!-- functions -->
+		<member name="M:GameTextForPlayer" syntax="GameTextForPlayer()">
+			<stacksize value="1"/>
+			<referrer name="wait_kh"/>
+			<referrer name="login_response"/>
+			<referrer name="textonenterbuilding"/>
+			<referrer name="payday"/>
+			<referrer name="handyauflegen"/>
+		</member>
+		<member name="M:GetPlayerDistanceFromPoint" syntax="GetPlayerDistanceFromPoint()">
+			<stacksize value="1"/>
+			<referrer name="wait_kh"/>
+		</member>
+		<member name="M:GetPlayerInterior" syntax="GetPlayerInterior()">
+			<stacksize value="1"/>
+			<referrer name="dologout"/>
+		</member>
+		<member name="M:GetPlayerMoney" syntax="GetPlayerMoney()">
+			<stacksize value="1"/>
+			<referrer name="dologout"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:GetPlayerName" syntax="GetPlayerName()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+			<referrer name="dologin"/>
+			<referrer name="setuserlizens"/>
+			<referrer name="user_stats"/>
+		</member>
+		<member name="M:GetPlayerPos" syntax="GetPlayerPos()">
+			<stacksize value="1"/>
+			<referrer name="dologout"/>
+		</member>
+		<member name="M:GetPlayerState" syntax="GetPlayerState()">
+			<stacksize value="1"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:GetPlayerVehicleID" syntax="GetPlayerVehicleID()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+			<referrer name="payday"/>
+			<referrer name="actionmenu"/>
+		</member>
+		<member name="M:GetPlayerVehicleSeat" syntax="GetPlayerVehicleSeat()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+			<referrer name="actionmenu"/>
+		</member>
+		<member name="M:GetPlayerWeapon" syntax="GetPlayerWeapon()">
+			<stacksize value="1"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:GetPlayerWeaponData" syntax="GetPlayerWeaponData()">
+			<stacksize value="1"/>
+			<referrer name="dologout"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:GetVehicleModel" syntax="GetVehicleModel()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+			<referrer name="actionmenu"/>
+		</member>
+		<member name="M:GetVehicleParamsEx" syntax="GetVehicleParamsEx()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:GivePlayerMoney" syntax="GivePlayerMoney()">
+			<stacksize value="1"/>
+			<referrer name="spawn_player"/>
+			<referrer name="dologout"/>
+			<referrer name="giveusermoney"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:GivePlayerWeapon" syntax="GivePlayerWeapon()">
+			<stacksize value="1"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:InterpolateCameraLookAt" syntax="InterpolateCameraLookAt()">
+			<stacksize value="1"/>
+			<referrer name="wait_kh"/>
+		</member>
+		<member name="M:InterpolateCameraPos" syntax="InterpolateCameraPos()">
+			<stacksize value="1"/>
+			<referrer name="wait_kh"/>
+		</member>
+		<member name="M:IsPlayerConnected" syntax="IsPlayerConnected()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:Kick" syntax="Kick()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:KillTimer" syntax="KillTimer()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:RemovePlayerFromVehicle" syntax="RemovePlayerFromVehicle()">
+			<stacksize value="1"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:ResetPlayerMoney" syntax="ResetPlayerMoney()">
+			<stacksize value="1"/>
+			<referrer name="spawn_player"/>
+			<referrer name="dologout"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:ResetPlayerWeapons" syntax="ResetPlayerWeapons()">
+			<stacksize value="1"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:SendClientMessage" syntax="SendClientMessage()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+			<referrer name="dologin"/>
+			<referrer name="setuserlizens"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:SendClientMessageToAll" syntax="SendClientMessageToAll()">
+			<stacksize value="1"/>
+			<referrer name="sendmessagetoallplayer"/>
+		</member>
+		<member name="M:SetPlayerArmedWeapon" syntax="SetPlayerArmedWeapon()">
+			<stacksize value="1"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:SetPlayerColor" syntax="SetPlayerColor()">
+			<stacksize value="1"/>
+			<referrer name="dologin"/>
+		</member>
+		<member name="M:SetPlayerHealth" syntax="SetPlayerHealth()">
+			<stacksize value="1"/>
+			<referrer name="spawn_player"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:SetPlayerInterior" syntax="SetPlayerInterior()">
+			<stacksize value="1"/>
+			<referrer name="spawn_player"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:SetPlayerPos" syntax="SetPlayerPos()">
+			<stacksize value="1"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:SetPlayerWantedLevel" syntax="SetPlayerWantedLevel()">
+			<stacksize value="1"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:SetSpawnInfo" syntax="SetSpawnInfo()">
+			<stacksize value="1"/>
+			<referrer name="spawn_player"/>
+		</member>
+		<member name="M:SetTimerEx" syntax="SetTimerEx()">
+			<stacksize value="1"/>
+			<referrer name="wait_kh"/>
+			<referrer name="login_response"/>
+			<referrer name="dologin"/>
+		</member>
+		<member name="M:SetVehicleParamsEx" syntax="SetVehicleParamsEx()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:SetVehicleToRespawn" syntax="SetVehicleToRespawn()">
+			<stacksize value="1"/>
+			<referrer name="payday"/>
+		</member>
+		<member name="M:ShowPlayerDialog" syntax="ShowPlayerDialog()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+			<referrer name="dologin"/>
+			<referrer name="actionmenu"/>
+			<referrer name="jobaction"/>
+			<referrer name="user_stats"/>
+		</member>
+		<member name="M:SpawnPlayer" syntax="SpawnPlayer()">
+			<stacksize value="1"/>
+			<referrer name="spawn_player"/>
+		</member>
+		<member name="M:TextDrawSetString" syntax="TextDrawSetString()">
+			<stacksize value="1"/>
+			<referrer name="usertextdrawupdate"/>
+		</member>
+		<member name="M:TogglePlayerSpectating" syntax="TogglePlayerSpectating()">
+			<stacksize value="1"/>
+			<referrer name="wait_kh"/>
+			<referrer name="spawn_player"/>
+		</member>
+		<member name="M:actionmenu" syntax="actionmenu(playerid)">
+			<attribute name="public"/>
+			<stacksize value="260"/>
+			<dependency name="GetPlayerVehicleID"/>
+			<dependency name="GetPlayerVehicleSeat"/>
+			<dependency name="GetVehicleModel"/>
+			<dependency name="ShowPlayerDialog"/>
+			<dependency name="angerufener"/>
+			<dependency name="anrufender"/>
+			<dependency name="playerdata"/>
+			<dependency name="strcat"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:dologin" syntax="dologin(playerid, inputtext[])">
+			<attribute name="public"/>
+			<stacksize value="1113"/>
+			<referrer name="login_response"/>
+			<dependency name="GetPlayerName"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPlayerColor"/>
+			<dependency name="SetTimerEx"/>
+			<dependency name="ShowPlayerDialog"/>
+			<dependency name="angerufener"/>
+			<dependency name="anrufender"/>
+			<dependency name="floatstr"/>
+			<dependency name="loadplayercarsforplayer"/>
+			<dependency name="mysql_fetch_field"/>
+			<dependency name="mysql_fetch_row"/>
+			<dependency name="mysql_format"/>
+			<dependency name="mysql_free_result"/>
+			<dependency name="mysql_store_result"/>
+			<dependency name="mysql_tquery"/>
+			<dependency name="paydaytimer"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerinhouse"/>
+			<dependency name="playerinshop"/>
+			<dependency name="spawn_player"/>
+			<dependency name="strval"/>
+			<dependency name="toroeffner"/>
+			<dependency name="true"/>
+			<dependency name="usertextdrawupdate"/>
+			<param name="playerid">
+			</param>
+			<param name="inputtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:dologout" syntax="dologout(playerid)">
+			<attribute name="public"/>
+			<stacksize value="868"/>
+			<dependency name="GetPlayerInterior"/>
+			<dependency name="GetPlayerMoney"/>
+			<dependency name="GetPlayerPos"/>
+			<dependency name="GetPlayerWeaponData"/>
+			<dependency name="GivePlayerMoney"/>
+			<dependency name="ResetPlayerMoney"/>
+			<dependency name="format"/>
+			<dependency name="getweaponslot"/>
+			<dependency name="mysql_tquery"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerinhouse"/>
+			<dependency name="strcat"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:fahrschule_landungbeantragen" syntax="fahrschule_landungbeantragen()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:fahrschule_startbeantragen" syntax="fahrschule_startbeantragen()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:fahrschule_stundenende" syntax="fahrschule_stundenende()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:fahrschule_stundenendelehrer" syntax="fahrschule_stundenendelehrer()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:floatround" syntax="floatround()">
+			<stacksize value="1"/>
+			<referrer name="wait_kh"/>
+			<referrer name="payday"/>
+			<referrer name="usertextdrawupdate"/>
+		</member>
+		<member name="M:floatstr" syntax="floatstr()">
+			<stacksize value="1"/>
+			<referrer name="dologin"/>
+		</member>
+		<member name="M:format" syntax="format()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+			<referrer name="dologout"/>
+			<referrer name="textonenterbuilding"/>
+			<referrer name="setuserlizens"/>
+			<referrer name="setuserjob"/>
+			<referrer name="payday"/>
+			<referrer name="sendmessagetoallplayer"/>
+			<referrer name="user_stats"/>
+		</member>
+		<member name="M:getweaponslot" syntax="getweaponslot(weaponid)">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<referrer name="dologout"/>
+			<referrer name="payday"/>
+			<param name="weaponid">
+			</param>
+		</member>
+		<member name="M:giveusermoney" syntax="giveusermoney(playerid, money)">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<referrer name="payday"/>
+			<dependency name="GivePlayerMoney"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerdata"/>
+			<param name="playerid">
+			</param>
+			<param name="money">
+			</param>
+		</member>
+		<member name="M:giveusermoneyonbank" syntax="giveusermoneyonbank(playerid, money)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="money">
+			</param>
+		</member>
+		<member name="M:handyauflegen" syntax="handyauflegen(playerid, i, kind)">
+			<attribute name="public"/>
+			<stacksize value="7"/>
+			<referrer name="login_response"/>
+			<dependency name="GameTextForPlayer"/>
+			<dependency name="angerufener"/>
+			<dependency name="anrufender"/>
+			<param name="playerid">
+			</param>
+			<param name="i">
+			</param>
+			<param name="kind">
+			</param>
+		</member>
+		<member name="M:hilfe_box" syntax="hilfe_box()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:jobaction" syntax="jobaction(playerid)">
+			<attribute name="public"/>
+			<stacksize value="260"/>
+			<dependency name="ShowPlayerDialog"/>
+			<dependency name="playerdata"/>
+			<dependency name="strcat"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:loadplayercarsforplayer" syntax="loadplayercarsforplayer()">
+			<stacksize value="1"/>
+			<referrer name="dologin"/>
+		</member>
+		<member name="M:login_response" syntax="login_response(playerid, dialogid, response, listitem, inputtext[])">
+			<attribute name="public"/>
+			<stacksize value="138"/>
+			<dependency name="GameTextForPlayer"/>
+			<dependency name="GetPlayerName"/>
+			<dependency name="GetPlayerVehicleID"/>
+			<dependency name="GetPlayerVehicleSeat"/>
+			<dependency name="GetVehicleModel"/>
+			<dependency name="GetVehicleParamsEx"/>
+			<dependency name="IsPlayerConnected"/>
+			<dependency name="Kick"/>
+			<dependency name="KillTimer"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetTimerEx"/>
+			<dependency name="SetVehicleParamsEx"/>
+			<dependency name="ShowPlayerDialog"/>
+			<dependency name="angerufener"/>
+			<dependency name="anrufender"/>
+			<dependency name="dologin"/>
+			<dependency name="fahrschule_landungbeantragen"/>
+			<dependency name="fahrschule_startbeantragen"/>
+			<dependency name="fahrschule_stundenende"/>
+			<dependency name="fahrschule_stundenendelehrer"/>
+			<dependency name="false"/>
+			<dependency name="format"/>
+			<dependency name="handyauflegen"/>
+			<dependency name="handytimer"/>
+			<dependency name="hilfe_box"/>
+			<dependency name="mysql_escape_string"/>
+			<dependency name="mysql_format"/>
+			<dependency name="mysql_tquery"/>
+			<dependency name="navibox"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerdata"/>
+			<dependency name="playereat"/>
+			<dependency name="strcmp"/>
+			<dependency name="strlen"/>
+			<dependency name="strval"/>
+			<dependency name="taxibeenden"/>
+			<dependency name="taxichangepreis"/>
+			<dependency name="taxiguest"/>
+			<dependency name="taxistreckebeenden"/>
+			<dependency name="true"/>
+			<dependency name="user_stats"/>
+			<param name="playerid">
+			</param>
+			<param name="dialogid">
+			</param>
+			<param name="response">
+			</param>
+			<param name="listitem">
+			</param>
+			<param name="inputtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:mysql_escape_string" syntax="mysql_escape_string()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:mysql_fetch_field" syntax="mysql_fetch_field()">
+			<stacksize value="1"/>
+			<referrer name="dologin"/>
+			<referrer name="setuserjob"/>
+			<referrer name="sendmessagetoallplayer"/>
+			<referrer name="user_stats"/>
+		</member>
+		<member name="M:mysql_fetch_row" syntax="mysql_fetch_row()">
+			<stacksize value="1"/>
+			<referrer name="dologin"/>
+			<referrer name="setuserjob"/>
+			<referrer name="sendmessagetoallplayer"/>
+			<referrer name="user_stats"/>
+		</member>
+		<member name="M:mysql_format" syntax="mysql_format()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+			<referrer name="dologin"/>
+		</member>
+		<member name="M:mysql_free_result" syntax="mysql_free_result()">
+			<stacksize value="1"/>
+			<referrer name="dologin"/>
+			<referrer name="setuserjob"/>
+			<referrer name="sendmessagetoallplayer"/>
+			<referrer name="user_stats"/>
+		</member>
+		<member name="M:mysql_store_result" syntax="mysql_store_result()">
+			<stacksize value="1"/>
+			<referrer name="dologin"/>
+			<referrer name="setuserjob"/>
+			<referrer name="sendmessagetoallplayer"/>
+			<referrer name="user_stats"/>
+		</member>
+		<member name="M:mysql_tquery" syntax="mysql_tquery()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+			<referrer name="dologin"/>
+			<referrer name="dologout"/>
+			<referrer name="setuserjob"/>
+			<referrer name="sendmessagetoallplayer"/>
+			<referrer name="user_stats"/>
+		</member>
+		<member name="M:navibox" syntax="navibox()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:payday" syntax="payday(playerid)">
+			<attribute name="public"/>
+			<stacksize value="252"/>
+			<dependency name="GameTextForPlayer"/>
+			<dependency name="GetPlayerMoney"/>
+			<dependency name="GetPlayerState"/>
+			<dependency name="GetPlayerVehicleID"/>
+			<dependency name="GetPlayerWeapon"/>
+			<dependency name="GetPlayerWeaponData"/>
+			<dependency name="GivePlayerMoney"/>
+			<dependency name="GivePlayerWeapon"/>
+			<dependency name="RemovePlayerFromVehicle"/>
+			<dependency name="ResetPlayerMoney"/>
+			<dependency name="ResetPlayerWeapons"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPlayerArmedWeapon"/>
+			<dependency name="SetPlayerHealth"/>
+			<dependency name="SetPlayerInterior"/>
+			<dependency name="SetPlayerPos"/>
+			<dependency name="SetPlayerWantedLevel"/>
+			<dependency name="SetVehicleToRespawn"/>
+			<dependency name="false"/>
+			<dependency name="floatround"/>
+			<dependency name="format"/>
+			<dependency name="getweaponslot"/>
+			<dependency name="giveusermoney"/>
+			<dependency name="mietwagen"/>
+			<dependency name="mietwagen"/>
+			<dependency name="mietwagen_alive"/>
+			<dependency name="mietwagen_alive"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerdata"/>
+			<dependency name="skilllevelcheck"/>
+			<dependency name="true"/>
+			<dependency name="usertextdrawupdate"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:playereat" syntax="playereat()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:sendmessagetoallplayer" syntax="sendmessagetoallplayer(msg[], senderid, style, werbeid)">
+			<attribute name="public"/>
+			<stacksize value="510"/>
+			<dependency name="SendClientMessageToAll"/>
+			<dependency name="format"/>
+			<dependency name="mysql_fetch_field"/>
+			<dependency name="mysql_fetch_row"/>
+			<dependency name="mysql_free_result"/>
+			<dependency name="mysql_store_result"/>
+			<dependency name="mysql_tquery"/>
+			<dependency name="strcat"/>
+			<param name="msg">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="senderid">
+			</param>
+			<param name="style">
+			</param>
+			<param name="werbeid">
+			</param>
+		</member>
+		<member name="M:setuserjob" syntax="setuserjob(playerid, jobid)">
+			<attribute name="public"/>
+			<stacksize value="160"/>
+			<dependency name="format"/>
+			<dependency name="mysql_fetch_field"/>
+			<dependency name="mysql_fetch_row"/>
+			<dependency name="mysql_free_result"/>
+			<dependency name="mysql_store_result"/>
+			<dependency name="mysql_tquery"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerdata"/>
+			<dependency name="strval"/>
+			<param name="playerid">
+			</param>
+			<param name="jobid">
+			</param>
+		</member>
+		<member name="M:setuserlizens" syntax="setuserlizens(playerid, lizens, senderid)">
+			<attribute name="public"/>
+			<stacksize value="6"/>
+			<dependency name="GetPlayerName"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="format"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerdata"/>
+			<param name="playerid">
+			</param>
+			<param name="lizens">
+			</param>
+			<param name="senderid">
+			</param>
+		</member>
+		<member name="M:skilllevelcheck" syntax="skilllevelcheck(playerid, jobid)">
+			<attribute name="public"/>
+			<stacksize value="3"/>
+			<referrer name="payday"/>
+			<dependency name="aufstiegsarray"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerdata"/>
+			<param name="playerid">
+			</param>
+			<param name="jobid">
+			</param>
+		</member>
+		<member name="M:spawn_player" syntax="spawn_player(playerid, death, posX, posY, posZ, winkel)">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<referrer name="dologin"/>
+			<dependency name="GivePlayerMoney"/>
+			<dependency name="ResetPlayerMoney"/>
+			<dependency name="SetPlayerHealth"/>
+			<dependency name="SetPlayerInterior"/>
+			<dependency name="SetSpawnInfo"/>
+			<dependency name="SpawnPlayer"/>
+			<dependency name="TogglePlayerSpectating"/>
+			<dependency name="false"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerdata"/>
+			<param name="playerid">
+			</param>
+			<param name="death">
+			</param>
+			<param name="posX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="posY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="posZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="winkel">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:strcat" syntax="strcat()">
+			<stacksize value="1"/>
+			<referrer name="dologout"/>
+			<referrer name="sendmessagetoallplayer"/>
+			<referrer name="actionmenu"/>
+			<referrer name="jobaction"/>
+			<referrer name="user_stats"/>
+			<referrer name="usertextdrawupdate"/>
+		</member>
+		<member name="M:strcmp" syntax="strcmp()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:strlen" syntax="strlen()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:strval" syntax="strval()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+			<referrer name="dologin"/>
+			<referrer name="setuserjob"/>
+			<referrer name="user_stats"/>
+		</member>
+		<member name="M:taxibeenden" syntax="taxibeenden()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:taxichangepreis" syntax="taxichangepreis()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:taxistreckebeenden" syntax="taxistreckebeenden()">
+			<stacksize value="1"/>
+			<referrer name="login_response"/>
+		</member>
+		<member name="M:textonenterbuilding" syntax="textonenterbuilding(playerid, txt[])">
+			<attribute name="public"/>
+			<stacksize value="7"/>
+			<dependency name="GameTextForPlayer"/>
+			<dependency name="format"/>
+			<param name="playerid">
+			</param>
+			<param name="txt">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:user_stats" syntax="user_stats(playerid)">
+			<attribute name="public"/>
+			<stacksize value="3086"/>
+			<referrer name="login_response"/>
+			<dependency name="GetPlayerName"/>
+			<dependency name="ShowPlayerDialog"/>
+			<dependency name="format"/>
+			<dependency name="mysql_fetch_field"/>
+			<dependency name="mysql_fetch_row"/>
+			<dependency name="mysql_free_result"/>
+			<dependency name="mysql_store_result"/>
+			<dependency name="mysql_tquery"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerdata"/>
+			<dependency name="strcat"/>
+			<dependency name="strval"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:usertextdrawupdate" syntax="usertextdrawupdate(playerid)">
+			<attribute name="public"/>
+			<stacksize value="108"/>
+			<referrer name="dologin"/>
+			<referrer name="payday"/>
+			<dependency name="TextDrawSetString"/>
+			<dependency name="aufstiegsarray"/>
+			<dependency name="berufserf1"/>
+			<dependency name="berufserf2"/>
+			<dependency name="floatround"/>
+			<dependency name="paydaydraw1"/>
+			<dependency name="paydaydraw2"/>
+			<dependency name="playerdata"/>
+			<dependency name="playerdata"/>
+			<dependency name="strcat"/>
+			<dependency name="userleveldraw1"/>
+			<dependency name="userleveldraw2"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:wait_kh" syntax="wait_kh(playerid)">
+			<attribute name="public"/>
+			<stacksize value="17"/>
+			<dependency name="GameTextForPlayer"/>
+			<dependency name="GetPlayerDistanceFromPoint"/>
+			<dependency name="InterpolateCameraLookAt"/>
+			<dependency name="InterpolateCameraPos"/>
+			<dependency name="SetTimerEx"/>
+			<dependency name="TogglePlayerSpectating"/>
+			<dependency name="false"/>
+			<dependency name="floatround"/>
+			<dependency name="hospital_cam"/>
+			<dependency name="hospital_cam"/>
+			<dependency name="hospital_spawn"/>
+			<dependency name="hospital_spawn"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+		</member>
+
+	</members>
+</doc>
