@@ -64,7 +64,7 @@ stock connectdb()
 {
 
 	g_sql = mysql_connect(SQL_HOSTNAME, SQL_USERNAME, SQL_PASSWORD, SQL_DATABASE); // AUTO_RECONNECT is enabled for this connection handle only
-	if (g_SQL == MYSQL_INVALID_HANDLE || mysql_errno(g_SQL) != 0)
+	if (g_sql == MYSQL_INVALID_HANDLE || mysql_errno(g_sql) != 0)
 	{
 		print("MySQL connection failed. Server is shutting down.");
 		SendRconCommand("exit"); // close the server if there is no connection
@@ -85,17 +85,16 @@ public OnPlayerConnect(playerid)
   GetPlayerName(playerid, pname, MAX_PLAYER_NAME);
   mysql_real_escape_string(pname,pname);
   format(query, sizeof(query), "SELECT online,COUNT(*) as anz FROM `accounts` WHERE `accname`='%s'", pname);
-  mysql_query(query);
-  mysql_store_result(MySQL:g_sql)();
+  new Cache:cache = mysql_query(g_sql, query);
   mysql_fetch_row(data);
-  mysql_fetch_field("anz",data);
+  cache_get_value_index("anz",data);
   if(strval(data) > 0)
   {
-	mysql_fetch_field("online",data);
+	cache_get_value_index("online",data);
 	if(strval(data) == 1)
 	  Kick(playerid);
 	else if(strval(data) == 0)
-	  ShowPlayerDialog(playerid, 3,DIALOG_STYLE_PASSWORD , "Willkommen:", "Auf unserem deutschen Roleplay Server.Dein Account ist bereits registriert.\n Gebe dein Passwort ein:", "Bestätigen", "Abbrechen");
+	  ShowPlayerDialog(playerid, 3,DIALOG_STYLE_PASSWORD , "Willkommen:", "Auf unserem deutschen Roleplay Server.Dein Account ist bereits registriert.\n Gebe dein Passwort ein:", "BestÐ´tigen", "Abbrechen");
   }
   else
     ShowPlayerDialog(playerid, 1,DIALOG_STYLE_MSGBOX , "Willkommen:", "Auf unserem deutschen Roleplay Server.\nDein Account ist nicht registriert, um einen Account anzulegen klicke auf Registrieren.", "Registrieren", "Abbrechen");
@@ -192,7 +191,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 		else 
 			SendClientMessage(playerid, COLOR_COP, "*** Sie sind nicht in Reichweite ***");
   }
-  else if(!strcmp(strget(cmdtext, 0), "/schock") && CopOnDuty[playerid] == true && playerdata[playerid][2] == 4)													// Macht das Ziel für 7 Sekunden bewegungsunfähig
+  else if(!strcmp(strget(cmdtext, 0), "/schock") && CopOnDuty[playerid] == true && playerdata[playerid][2] == 4)													// Macht das Ziel fÑŒr 7 Sekunden bewegungsunfÐ´hig
   {
 		new Float:pX, Float:pY, Float:pZ;
 		GetPlayerPos(strval(strget(cmdtext, 1)), pX, pY, pZ);
@@ -201,7 +200,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 			ApplyAnimation(strval(strget(cmdtext, 1)),"PED","WALK_DRUNK",4.1,0,1,1,0,7000,1);
 		}
   }
-  else if(!strcmp(strget(cmdtext, 0), "/ergeben"))			// Nimmt die Hände hoch
+  else if(!strcmp(strget(cmdtext, 0), "/ergeben"))			// Nimmt die HÐ´nde hoch
   {
 		new bool:handsup = false;
 		if(handsup == false)
@@ -260,7 +259,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 		}
 		return 1;
   }
-  else if(!strcmp(strget(cmdtext, 0), "/verhaften") && CopOnDuty[playerid] == true && playerdata[playerid][2] == 4)	// Bringt den Verdächtigen ins Gefängnis	{
+  else if(!strcmp(strget(cmdtext, 0), "/verhaften") && CopOnDuty[playerid] == true && playerdata[playerid][2] == 4)	// Bringt den VerdÐ´chtigen ins GefÐ´ngnis	{
   {
 		new Float:pX, Float:pY, Float:pZ;
 		GetPlayerPos(strval(strget(cmdtext, 1)), pX, pY, pZ);
@@ -375,9 +374,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
   MietwagenDialogResponse(playerid, dialogid, response, listitem, inputtext);
   
   /*
-   * GEBÄUDE DIALOGE ---------
+   * GEBÐ”UDE DIALOGE ---------
    */
-  //   Postgebäude ID(100)
+  //   PostgebÐ´ude ID(100)
   post_response(playerid, dialogid, response, listitem, inputtext);
   //   Berufsschule ID(60-69)
   berufs_response(playerid, dialogid, response, listitem, inputtext);
@@ -452,7 +451,7 @@ public OnPlayerPickUpPickup(playerid, pickupid)
    */
   
   /*
-   *  GEBÄUDE PICKUPS
+   *  GEBÐ”UDE PICKUPS
    */
   //     Rathaus
   rath_pickups(playerid,pickupid);
@@ -466,7 +465,7 @@ public OnPlayerPickUpPickup(playerid, pickupid)
   berufs_pickup(playerid,pickupid);
   //    Autohaus
   auto_pickup(playerid,pickupid);
-  //    User Häuser
+  //    User HÐ´user
   userhaus_pickup(playerid,pickupid);
   
   /*
@@ -641,7 +640,7 @@ public OnPlayerDisconnect(playerid, reason)
   if(taxiguest[playerid] > 0) finddriverbyexit(playerid);
   if(taxidriver[playerid] > 0) abbruch_taxi(playerid,0);
   KillTimer(paydaytimer[playerid]); 	// Payday stoppen
-  KillTimer(toroeffner[playerid]); 		// Türtimer stoppen
+  KillTimer(toroeffner[playerid]); 		// TÑŒrtimer stoppen
   dologout(playerid); 					// Alle Daten in DB schreiben
   if(playerinhouse[playerid] >= 0)
   {
@@ -702,7 +701,7 @@ public OnPlayerStateChange(playerid, PLAYER_STATE:newstate, PLAYER_STATE:oldstat
   }
   if(newstate == PLAYER_STATE_DRIVER)		// Spieler steigt als Fahrer in ein Fahrzeug
   {
-	//Zeige Tacho für alle Fahrzeuge ausser Fahrräder
+	//Zeige Tacho fÑŒr alle Fahrzeuge ausser FahrrÐ´der
 	if(GetVehicleModel(GetPlayerVehicleID(playerid)) != 509 && GetVehicleModel(GetPlayerVehicleID(playerid)) != 510 && GetVehicleModel(GetPlayerVehicleID(playerid)) != 481)
 	{
       if(showtacho(playerid))
@@ -724,7 +723,7 @@ public OnPlayerStateChange(playerid, PLAYER_STATE:newstate, PLAYER_STATE:oldstat
 			else if(mietwagen[i][8] == playerid)
 			{
 			  new output[128];
-			  format(output, sizeof(output), "*** Die Restliche Mietdauer beträgt %i Minuten ***", floatround(mietwagen[i][10]));
+			  format(output, sizeof(output), "*** Die Restliche Mietdauer betrÐ´gt %i Minuten ***", floatround(mietwagen[i][10]));
 			  SendClientMessage(playerid, COLOR_YELLOW, output);
 			}
 		  }
@@ -744,7 +743,7 @@ public OnPlayerStateChange(playerid, PLAYER_STATE:newstate, PLAYER_STATE:oldstat
 			  new string[30];
 			  format(string, sizeof(string), "~w~Du bist kein~n~~y~Trucker");
 			  GameTextForPlayer(playerid, string, 3000, 1);
-			  SendClientMessage(playerid, COLOR_TRUCKER, "*** Nur Trucker dürfen dieses Fahrzeug benutzen ***");
+			  SendClientMessage(playerid, COLOR_TRUCKER, "*** Nur Trucker dÑŒrfen dieses Fahrzeug benutzen ***");
 		  }
 		}
 		//----------Limofahrer-------------------
@@ -766,7 +765,7 @@ public OnPlayerStateChange(playerid, PLAYER_STATE:newstate, PLAYER_STATE:oldstat
 			new string[40];
 			format(string, sizeof(string), "~w~Du bist kein~n~~y~Taxifahrer");
 			GameTextForPlayer(playerid, string, 3000, 1);
-			SendClientMessage(playerid, COLOR_TRUCKER, "*** Nur Taxifahrer dürfen dieses Fahrzeug benutzen ***");
+			SendClientMessage(playerid, COLOR_TRUCKER, "*** Nur Taxifahrer dÑŒrfen dieses Fahrzeug benutzen ***");
 		  }
 		}
 		//---------- POLIZIST ----------------
@@ -782,7 +781,7 @@ public OnPlayerStateChange(playerid, PLAYER_STATE:newstate, PLAYER_STATE:oldstat
 					new string[30];
 					format(string, sizeof(string), "~w~Du bist kein~n~~y~Polizist");
 					GameTextForPlayer(playerid, string, 3000, 1);
-					SendClientMessage(playerid, COLOR_COP, "*** Nur Polizeibeamte dürfen dieses Fahrzeug benutzen ***");
+					SendClientMessage(playerid, COLOR_COP, "*** Nur Polizeibeamte dÑŒrfen dieses Fahrzeug benutzen ***");
 				}
 		}
 		if(PRODCAR_LS)
@@ -797,7 +796,7 @@ public OnPlayerStateChange(playerid, PLAYER_STATE:newstate, PLAYER_STATE:oldstat
 			new string[32];
 			format(string, sizeof(string), "~w~Du bist kein~n~~y~Lieferant");
 			GameTextForPlayer(playerid, string, 3000, 1);
-			SendClientMessage(playerid, COLOR_TRUCKER, "*** Nur Lieferanten dürfen dieses Fahrzeug benutzen ***");
+			SendClientMessage(playerid, COLOR_TRUCKER, "*** Nur Lieferanten dÑŒrfen dieses Fahrzeug benutzen ***");
 		  }
 		}
 		if(PRODCAR_SF)
@@ -812,7 +811,7 @@ public OnPlayerStateChange(playerid, PLAYER_STATE:newstate, PLAYER_STATE:oldstat
 			new string[32];
 			format(string, sizeof(string), "~w~Du bist kein~n~~y~Lieferant");
 			GameTextForPlayer(playerid, string, 3000, 1);
-			SendClientMessage(playerid, COLOR_TRUCKER, "*** Nur Lieferanten dürfen dieses Fahrzeug benutzen ***");
+			SendClientMessage(playerid, COLOR_TRUCKER, "*** Nur Lieferanten dÑŒrfen dieses Fahrzeug benutzen ***");
 		  }
 		}
 		if(PRODCAR_LV)
@@ -827,7 +826,7 @@ public OnPlayerStateChange(playerid, PLAYER_STATE:newstate, PLAYER_STATE:oldstat
 		  new string[32];
 		  format(string, sizeof(string), "~w~Du bist kein~n~~y~Lieferant");
 		  GameTextForPlayer(playerid, string, 3000, 1);
-		  SendClientMessage(playerid, COLOR_TRUCKER, "*** Nur Lieferanten dürfen dieses Fahrzeug benutzen ***");
+		  SendClientMessage(playerid, COLOR_TRUCKER, "*** Nur Lieferanten dÑŒrfen dieses Fahrzeug benutzen ***");
 		}
 		}
 	  }
@@ -860,7 +859,7 @@ public OnPlayerKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys)
   {
 	if(!bank_activate(playerid))
 	{
-	  //nächste möglichkeit!
+	  //nÐ´chste mÑ†glichkeit!
 	}
   }
   
@@ -935,7 +934,7 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 		if(vhealth == 0)
 		{
 		  CancelTsMission(playerid);
-		  GameTextForPlayer(playerid, "~r~Mission felgeschlagen!~n~Ihr Fahrzeug wurde zerstört.", 3000, 3);
+		  GameTextForPlayer(playerid, "~r~Mission felgeschlagen!~n~Ihr Fahrzeug wurde zerstÑ†rt.", 3000, 3);
 		}
 	  }
 	}
