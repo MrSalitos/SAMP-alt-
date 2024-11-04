@@ -107,7 +107,7 @@ new playerdata[MAX_PLAYERS][80];
 42 => bs_Pfahrer	52 => bs_muell			62 => house3          72 => Essensinventar
 43 => bs_Trucker	53 => bs_auftra			63 => inter3
 44 => leer			54 => bs_touri			64 => house4
-45 => bs_Bauer      55 => Gefängnistimer	65 => inter4
+45 => bs_Bauer      55 => GefÐ´ngnistimer	65 => inter4
 46 => bs_Waffenh    56 => Premium			66 => house5
 47 => bs_Fischer    57 => Fahrverbot		67 => inter5
 48 => bs_Drogend	58 => house1			68 => Miete(gesamt)
@@ -133,7 +133,7 @@ new aufstiegsarray[][6] =
 
 new anrufender[MAX_PLAYERS];
 new angerufener[MAX_PLAYERS];
-new taxiguest[MAX_PLAYERS]; 	// Inhalt Anzahl Kilometer gefahren für Gast
+new taxiguest[MAX_PLAYERS]; 	// Inhalt Anzahl Kilometer gefahren fÑŒr Gast
 
 new paydaytimer[MAX_PLAYERS],toroeffner[MAX_PLAYERS],handytimer[MAX_PLAYERS];
 new playerinshop[MAX_PLAYERS];
@@ -164,7 +164,7 @@ public login_response(playerid, dialogid, response, listitem, inputtext[])
 	if(dialogid == 1)
 	{
 		if(response)
-		ShowPlayerDialog(playerid, 2,DIALOG_STYLE_PASSWORD , "Spielerregistrierung:", "Geben Sie ihr gewünschtes Passwort ein:\n(Mind. 6 Zeichen)", "Registrieren", "Abbrechen");
+		ShowPlayerDialog(playerid, 2,DIALOG_STYLE_PASSWORD , "Spielerregistrierung:", "Geben Sie ihr gewÑŒnschtes Passwort ein:\n(Mind. 6 Zeichen)", "Registrieren", "Abbrechen");
 		else
 		Kick(playerid);
 	}
@@ -181,20 +181,20 @@ public login_response(playerid, dialogid, response, listitem, inputtext[])
 				mysql_format(MySQL:g_sql, query, sizeof(query), "INSERT INTO `user_list` (accname,password) VALUES ('%s',MD5('%s'))", pname,inputtext);
 				mysql_tquery(MySQL:g_sql, query);
 				mysql_tquery(MySQL:g_sql, "SELECT LAST_INSERT_ID() as userid FROM user_list");
-				// mysql_store_result();
-				// mysql_fetch_row(data);
-				// mysql_fetch_field("userid",data);
+				// mysql_store_result(g_sql);
+				// cache_get_row_count(data);
+				// cache_get_value_index("userid",data);
 				mysql_format(MySQL:g_sql, query, sizeof(query), "INSERT INTO `user_licence` (accid) VALUES ('%i')", strval(data));
 				mysql_tquery(MySQL:g_sql, query);
 				mysql_format(MySQL:g_sql, query, sizeof(query), "INSERT INTO `user_weapons` (accid) VALUES ('%i')", strval(data));
 				mysql_tquery(MySQL:g_sql, query);
-				ShowPlayerDialog(playerid, 4,DIALOG_STYLE_MSGBOX, "Spielerregistrierung:", "Die Registrierung war erfolgreich, um fortzufahren\n wählen Sie bitte ein Geschlecht:", "Männlich", "Weiblich");
+				ShowPlayerDialog(playerid, 4,DIALOG_STYLE_MSGBOX, "Spielerregistrierung:", "Die Registrierung war erfolgreich, um fortzufahren\n wÐ´hlen Sie bitte ein Geschlecht:", "MÐ´nnlich", "Weiblich");
 			}
 			else
-			ShowPlayerDialog(playerid, 2,DIALOG_STYLE_PASSWORD , "Spielerregistrierung:", "Geben Sie ihr gewünschtes Passwort ein:\n(Mind. 6 Zeichen)", "Registrieren", "Abbrechen");
+			ShowPlayerDialog(playerid, 2,DIALOG_STYLE_PASSWORD , "Spielerregistrierung:", "Geben Sie ihr gewÑŒnschtes Passwort ein:\n(Mind. 6 Zeichen)", "Registrieren", "Abbrechen");
 		}
 		else
-		ShowPlayerDialog(playerid, 2,DIALOG_STYLE_PASSWORD , "Spielerregistrierung:", "Geben Sie ihr gewünschtes Passwort ein:\n(Mind. 6 Zeichen)", "Registrieren", "Abbrechen");
+		ShowPlayerDialog(playerid, 2,DIALOG_STYLE_PASSWORD , "Spielerregistrierung:", "Geben Sie ihr gewÑŒnschtes Passwort ein:\n(Mind. 6 Zeichen)", "Registrieren", "Abbrechen");
 	}
 	if(dialogid == 3)
 	{
@@ -213,7 +213,7 @@ public login_response(playerid, dialogid, response, listitem, inputtext[])
 		else
 		mysql_format(MySQL:g_sql, query, sizeof(query), "UPDATE user_list SET `geschlecht`=1,`skinid`=131 WHERE `accname`='%s'", pname);
 		mysql_tquery(MySQL:g_sql, query);
-		ShowPlayerDialog(playerid, 3,DIALOG_STYLE_PASSWORD , "Login:", "Geben Sie ihr Passwort ein:", "Bestätigen", "Abbrechen");
+		ShowPlayerDialog(playerid, 3,DIALOG_STYLE_PASSWORD , "Login:", "Geben Sie ihr Passwort ein:", "BestÐ´tigen", "Abbrechen");
 	}
 	if(dialogid == 97 && response)
 	{
@@ -228,7 +228,7 @@ public login_response(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(anrufender[playerid], COLOR_YELLOW, "Ihr Anruf wurde entgegengenommen.");
 			}
 			else if(anrufender[playerid] < 0)
-			ShowPlayerDialog(playerid,1015,DIALOG_STYLE_INPUT, "Jemanden anrufen", "Geben Sie die Nummer des Spielers ein, welchen Sie anrufen möchten.", "Anrufen", "Abbrechen");
+			ShowPlayerDialog(playerid,1015,DIALOG_STYLE_INPUT, "Jemanden anrufen", "Geben Sie die Nummer des Spielers ein, welchen Sie anrufen mÑ†chten.", "Anrufen", "Abbrechen");
 			else
 			{
 				handyauflegen(playerid,anrufender[playerid],0);
@@ -266,7 +266,7 @@ public login_response(playerid, dialogid, response, listitem, inputtext[])
 			new output[100];
 			if(taxiguest[playerid] == 0) format(output,100,"Taxi rufen \n");
 			else format(output,100,"Taxi abbestellen \n");
-			ShowPlayerDialog(playerid,105,DIALOG_STYLE_LIST , "Aktion", output, "Auswählen", "Abbrechen");
+			ShowPlayerDialog(playerid,105,DIALOG_STYLE_LIST , "Aktion", output, "AuswÐ´hlen", "Abbrechen");
 		}
 		else if(listitem == 6 && GetPlayerVehicleID(playerid) != 0 && GetPlayerVehicleSeat(playerid) == 0 && GetVehicleModel(GetPlayerVehicleID(playerid)) != 509 && GetVehicleModel(GetPlayerVehicleID(playerid)) != 510 && GetVehicleModel(GetPlayerVehicleID(playerid)) != 481)
 		{
@@ -347,78 +347,78 @@ public dologin(playerid,inputtext[])
 	// mysql_escape_string(inputtext,inputtext);
 	mysql_format(MySQL:g_sql, query, sizeof(query), "SELECT COUNT(*) as anz FROM `accounts` JOIN `jobs` WHERE `accname`='%s' AND password=MD5('%s') AND accounts.jobid=jobs.jobid", pname,inputtext);
 	mysql_tquery(MySQL:g_sql, query);
-	// mysql_store_result();
-	// mysql_fetch_field("anz",data);
+	// mysql_store_result(g_sql);
+	// cache_get_value_index("anz",data);
 	if(strval(data) == 1)
 	{
 		mysql_format(MySQL:g_sql, query, sizeof(query), "SELECT * FROM `accounts` JOIN `jobs` WHERE `accname`='%s' AND password=MD5('%s') AND accounts.jobid=jobs.jobid", pname,inputtext);
 		mysql_tquery(MySQL:g_sql, query);
-		// mysql_store_result();
-		// mysql_fetch_row(data);
-		// mysql_fetch_field("accid",data);			playerdata[playerid][0] = strval(data);
-		// mysql_fetch_field("player_pos_x", data);	data2 = floatstr(data);
-		// mysql_fetch_field("player_pos_y", data);    data3 = floatstr(data);
-		// mysql_fetch_field("player_pos_z", data);    data4 = floatstr(data);
-		// mysql_fetch_field("skinid", data);			playerdata[playerid][1] = strval(data);
-		// mysql_fetch_field("jobid", data);			playerdata[playerid][2] = strval(data);
-		// mysql_fetch_field("skilllevel", data);      playerdata[playerid][3] = strval(data);
-		// mysql_fetch_field("geld_bar", data);		playerdata[playerid][4] = strval(data);
-		// mysql_fetch_field("geld_bank", data);		playerdata[playerid][5] = strval(data);
-		// mysql_fetch_field("userlevel", data);		playerdata[playerid][6] = strval(data);
-		// mysql_fetch_field("playtime", data);		playerdata[playerid][7] = strval(data);
-		// mysql_fetch_field("skillcount", data);		playerdata[playerid][8] = strval(data);
-		// mysql_fetch_field("paydaycount", data);		playerdata[playerid][9] = strval(data);
-		// mysql_fetch_field("handy", data);			playerdata[playerid][10] = strval(data);
-		// mysql_fetch_field("weapon1",data);			playerdata[playerid][11] = strval(data);
-		// mysql_fetch_field("ammo1",data);	        playerdata[playerid][12] = strval(data);
-		// mysql_fetch_field("weapon2",data);          playerdata[playerid][13] = strval(data);
-		// mysql_fetch_field("ammo2",data);	        playerdata[playerid][14] = strval(data);
-		// mysql_fetch_field("weapon3",data);		    playerdata[playerid][15] = strval(data);
-		// mysql_fetch_field("ammo3",data);	        playerdata[playerid][16] = strval(data);
-		// mysql_fetch_field("health",data);			playerdata[playerid][17] = strval(data);
-		// mysql_fetch_field("tode",data);				playerdata[playerid][18] = strval(data);
-		// mysql_fetch_field("gehalt",data);			playerdata[playerid][19] = strval(data);
-		// mysql_fetch_field("lizens_roller",data);	playerdata[playerid][20] = strval(data);
-		// mysql_fetch_field("lizens_a",data);			playerdata[playerid][21] = strval(data);
-		// mysql_fetch_field("lizens_b",data);			playerdata[playerid][22] = strval(data);
-		// mysql_fetch_field("lizens_c",data);			playerdata[playerid][23] = strval(data);
-		// mysql_fetch_field("lizens_ce",data);		playerdata[playerid][24] = strval(data);
-		// mysql_fetch_field("lizens_boot",data);		playerdata[playerid][25] = strval(data);
-		// mysql_fetch_field("lizens_fischer",data);	playerdata[playerid][26] = strval(data);
-		// mysql_fetch_field("lizens_flugklein",data);	playerdata[playerid][27] = strval(data);
-		// mysql_fetch_field("lizens_fluggross",data);	playerdata[playerid][28] = strval(data);
-		// mysql_fetch_field("lizens_heli",data);		playerdata[playerid][29] = strval(data);
-		// mysql_fetch_field("lizens_angel",data);		playerdata[playerid][30] = strval(data);
-		// mysql_fetch_field("lizens_waffe",data);		playerdata[playerid][31] = strval(data);
-		// mysql_fetch_field("perso",data);			playerdata[playerid][32] = strval(data);	
-		// mysql_fetch_field("adminlevel",data);		playerdata[playerid][33] = strval(data);
-		// mysql_fetch_field("interior",data);			playerdata[playerid][34] = strval(data);
-		// mysql_fetch_field("fahndung",data);			playerdata[playerid][35] = strval(data);
-		// mysql_fetch_field("geschlecht",data);	    playerdata[playerid][36] = strval(data);
+		// mysql_store_result(g_sql);
+		// cache_get_row_count(data);
+		// cache_get_value_index("accid",data);			playerdata[playerid][0] = strval(data);
+		// cache_get_value_index("player_pos_x", data);	data2 = floatstr(data);
+		// cache_get_value_index("player_pos_y", data);    data3 = floatstr(data);
+		// cache_get_value_index("player_pos_z", data);    data4 = floatstr(data);
+		// cache_get_value_index("skinid", data);			playerdata[playerid][1] = strval(data);
+		// cache_get_value_index("jobid", data);			playerdata[playerid][2] = strval(data);
+		// cache_get_value_index("skilllevel", data);      playerdata[playerid][3] = strval(data);
+		// cache_get_value_index("geld_bar", data);		playerdata[playerid][4] = strval(data);
+		// cache_get_value_index("geld_bank", data);		playerdata[playerid][5] = strval(data);
+		// cache_get_value_index("userlevel", data);		playerdata[playerid][6] = strval(data);
+		// cache_get_value_index("playtime", data);		playerdata[playerid][7] = strval(data);
+		// cache_get_value_index("skillcount", data);		playerdata[playerid][8] = strval(data);
+		// cache_get_value_index("paydaycount", data);		playerdata[playerid][9] = strval(data);
+		// cache_get_value_index("handy", data);			playerdata[playerid][10] = strval(data);
+		// cache_get_value_index("weapon1",data);			playerdata[playerid][11] = strval(data);
+		// cache_get_value_index("ammo1",data);	        playerdata[playerid][12] = strval(data);
+		// cache_get_value_index("weapon2",data);          playerdata[playerid][13] = strval(data);
+		// cache_get_value_index("ammo2",data);	        playerdata[playerid][14] = strval(data);
+		// cache_get_value_index("weapon3",data);		    playerdata[playerid][15] = strval(data);
+		// cache_get_value_index("ammo3",data);	        playerdata[playerid][16] = strval(data);
+		// cache_get_value_index("health",data);			playerdata[playerid][17] = strval(data);
+		// cache_get_value_index("tode",data);				playerdata[playerid][18] = strval(data);
+		// cache_get_value_index("gehalt",data);			playerdata[playerid][19] = strval(data);
+		// cache_get_value_index("lizens_roller",data);	playerdata[playerid][20] = strval(data);
+		// cache_get_value_index("lizens_a",data);			playerdata[playerid][21] = strval(data);
+		// cache_get_value_index("lizens_b",data);			playerdata[playerid][22] = strval(data);
+		// cache_get_value_index("lizens_c",data);			playerdata[playerid][23] = strval(data);
+		// cache_get_value_index("lizens_ce",data);		playerdata[playerid][24] = strval(data);
+		// cache_get_value_index("lizens_boot",data);		playerdata[playerid][25] = strval(data);
+		// cache_get_value_index("lizens_fischer",data);	playerdata[playerid][26] = strval(data);
+		// cache_get_value_index("lizens_flugklein",data);	playerdata[playerid][27] = strval(data);
+		// cache_get_value_index("lizens_fluggross",data);	playerdata[playerid][28] = strval(data);
+		// cache_get_value_index("lizens_heli",data);		playerdata[playerid][29] = strval(data);
+		// cache_get_value_index("lizens_angel",data);		playerdata[playerid][30] = strval(data);
+		// cache_get_value_index("lizens_waffe",data);		playerdata[playerid][31] = strval(data);
+		// cache_get_value_index("perso",data);			playerdata[playerid][32] = strval(data);	
+		// cache_get_value_index("adminlevel",data);		playerdata[playerid][33] = strval(data);
+		// cache_get_value_index("interior",data);			playerdata[playerid][34] = strval(data);
+		// cache_get_value_index("fahndung",data);			playerdata[playerid][35] = strval(data);
+		// cache_get_value_index("geschlecht",data);	    playerdata[playerid][36] = strval(data);
 		// //37 ist leer
-		// mysql_fetch_field("bs_fahrl",data);	        playerdata[playerid][38] = strval(data);
-		// mysql_fetch_field("bs_pilot",data);	        playerdata[playerid][39] = strval(data);
-		// mysql_fetch_field("bs_poliz",data);	        playerdata[playerid][40] = strval(data);
-		// mysql_fetch_field("bs_pbote",data);	        playerdata[playerid][41] = strval(data);
-		// mysql_fetch_field("bs_prodf",data);	        playerdata[playerid][42] = strval(data);
-		// mysql_fetch_field("bs_truck",data);	        playerdata[playerid][43] = strval(data);
-		// mysql_fetch_field("bs_bauer",data);	        playerdata[playerid][45] = strval(data);
-		// mysql_fetch_field("bs_waffe",data);	        playerdata[playerid][46] = strval(data);
-		// mysql_fetch_field("bs_fische",data);	    playerdata[playerid][47] = strval(data);
-		// mysql_fetch_field("bs_droge",data);	        playerdata[playerid][48] = strval(data);
-		// mysql_fetch_field("bs_mecha",data);	        playerdata[playerid][49] = strval(data);
-		// mysql_fetch_field("bs_taxif",data);	        playerdata[playerid][50] = strval(data);
-		// mysql_fetch_field("bs_sanit",data);	        playerdata[playerid][51] = strval(data);
-		// mysql_fetch_field("bs_muell",data);	        playerdata[playerid][52] = strval(data);
-		// mysql_fetch_field("bs_autra",data);	        playerdata[playerid][53] = strval(data);
-		// mysql_fetch_field("bs_touri",data);	        playerdata[playerid][54] = strval(data);
+		// cache_get_value_index("bs_fahrl",data);	        playerdata[playerid][38] = strval(data);
+		// cache_get_value_index("bs_pilot",data);	        playerdata[playerid][39] = strval(data);
+		// cache_get_value_index("bs_poliz",data);	        playerdata[playerid][40] = strval(data);
+		// cache_get_value_index("bs_pbote",data);	        playerdata[playerid][41] = strval(data);
+		// cache_get_value_index("bs_prodf",data);	        playerdata[playerid][42] = strval(data);
+		// cache_get_value_index("bs_truck",data);	        playerdata[playerid][43] = strval(data);
+		// cache_get_value_index("bs_bauer",data);	        playerdata[playerid][45] = strval(data);
+		// cache_get_value_index("bs_waffe",data);	        playerdata[playerid][46] = strval(data);
+		// cache_get_value_index("bs_fische",data);	    playerdata[playerid][47] = strval(data);
+		// cache_get_value_index("bs_droge",data);	        playerdata[playerid][48] = strval(data);
+		// cache_get_value_index("bs_mecha",data);	        playerdata[playerid][49] = strval(data);
+		// cache_get_value_index("bs_taxif",data);	        playerdata[playerid][50] = strval(data);
+		// cache_get_value_index("bs_sanit",data);	        playerdata[playerid][51] = strval(data);
+		// cache_get_value_index("bs_muell",data);	        playerdata[playerid][52] = strval(data);
+		// cache_get_value_index("bs_autra",data);	        playerdata[playerid][53] = strval(data);
+		// cache_get_value_index("bs_touri",data);	        playerdata[playerid][54] = strval(data);
 		// // 55
-		// mysql_fetch_field("premium",data);	        playerdata[playerid][56] = strval(data);
-		// mysql_fetch_field("fahrverbot",data);	    playerdata[playerid][57] = strval(data);
-		// mysql_fetch_field("skinchanges",data);	    playerdata[playerid][70] = strval(data);
-		// mysql_fetch_field("kills",data);	        playerdata[playerid][71] = strval(data);
-		// mysql_fetch_field("essensinventar",data);   playerdata[playerid][72] = strval(data);
-		// mysql_fetch_field("houseid",data);	    	playerinhouse[playerid] = strval(data);
+		// cache_get_value_index("premium",data);	        playerdata[playerid][56] = strval(data);
+		// cache_get_value_index("fahrverbot",data);	    playerdata[playerid][57] = strval(data);
+		// cache_get_value_index("skinchanges",data);	    playerdata[playerid][70] = strval(data);
+		// cache_get_value_index("kills",data);	        playerdata[playerid][71] = strval(data);
+		// cache_get_value_index("essensinventar",data);   playerdata[playerid][72] = strval(data);
+		// cache_get_value_index("houseid",data);	    	playerinhouse[playerid] = strval(data);
 		
 		spawn_player(playerid,0,data2,data3,data4,0.0);
 		paydaytimer[playerid] = SetTimerEx("payday", 60000, true, "i", playerid);
@@ -429,8 +429,7 @@ public dologin(playerid,inputtext[])
 		mysql_tquery(MySQL:g_sql, query);
 		
 		mysql_format(MySQL:g_sql, query, sizeof(query), "SELECT * FROM `user_house` WHERE accid = %i", playerdata[playerid][0]);
-		mysql_tquery(MySQL:g_sql, query);
-		mysql_store_result();
+		new Cache:cache = mysql_query(g_sql, query);
 		
 		new i = 0,miete = 0;
 		playerdata[playerid][58] = playerdata[playerid][59] = -1;
@@ -439,23 +438,22 @@ public dologin(playerid,inputtext[])
 		playerdata[playerid][64] = playerdata[playerid][65] = -1;
 		playerdata[playerid][66] = playerdata[playerid][67] = -1;
 		
-		while(mysql_fetch_row(data))
+		while(cache_get_row_count(data))
 		{
-			mysql_fetch_field("houseid",data);
+			cache_get_value_index("houseid",data);
 			playerdata[playerid][(58+i)] = strval(data);
 			i++;
-			mysql_fetch_field("interid",data);
+			cache_get_value_index("interid",data);
 			playerdata[playerid][(58+i)] = strval(data);
-			mysql_fetch_field("price",data);
+			cache_get_value_index("price",data);
 			miete = miete + strval(data);
 		}
 		playerdata[playerid][68] = miete;
 		
 		mysql_format(MySQL:g_sql, query,100,"SELECT COUNT(*) as anz FROM `user_vehicles` WHERE vers = 1 AND accid=%i",playerdata[playerid][0]);
-		mysql_tquery(MySQL:g_sql, query);
-		mysql_store_result();
-		mysql_fetch_row(data);
-		mysql_fetch_field("anz",data);
+		new Cache:cache = mysql_query(g_sql, query);
+		cache_get_row_count(data);
+		cache_get_value_index("anz",data);
 		playerdata[playerid][69] = 50 * strval(data);
 		
 		loadplayercarsforplayer(playerdata[playerid][0]);
@@ -469,7 +467,7 @@ public dologin(playerid,inputtext[])
 	}
 	else
 	{
-		ShowPlayerDialog(playerid, 3,DIALOG_STYLE_PASSWORD , "Login:", "Passwort falsch. Gebe dein Passwort erneut ein:", "Bestätigen", "Abbrechen");
+		ShowPlayerDialog(playerid, 3,DIALOG_STYLE_PASSWORD , "Login:", "Passwort falsch. Gebe dein Passwort erneut ein:", "BestÐ´tigen", "Abbrechen");
 	}
 }
 
@@ -505,7 +503,7 @@ public dologout(playerid)
 	GetPlayerWeaponData(playerid,WEAPON_SLOT:weaponslot,WEAPON:weaponid,ammo);
 	if(ammo < playerdata[playerid][16]) playerdata[playerid][16] = ammo;
 	
-	//Bargeld überprüfen
+	//Bargeld ÑŒberprÑŒfen
 	if(GetPlayerMoney(playerid) > playerdata[playerid][4]) {ResetPlayerMoney(playerid);GivePlayerMoney(playerid,playerdata[playerid][4]);}
 	else if(GetPlayerMoney(playerid) < playerdata[playerid][4]){playerdata[playerid][4] = GetPlayerMoney(playerid);}
 	
@@ -597,7 +595,7 @@ public setuserlizens(playerid,lizens,senderid)
 	}
 	format(output,sizeof(output)," Du hast von %s den %s erhalten.",pname2,data);
 	SendClientMessage(playerid,COLOR_BERUF,output);
-	format(output,sizeof(output)," %s erhält den %s.",pname,data);
+	format(output,sizeof(output)," %s erhÐ´lt den %s.",pname,data);
 	SendClientMessage(senderid,COLOR_BERUF,output);
 }
 
@@ -630,10 +628,9 @@ public setuserjob(playerid,jobid)
 	else
 	{
 		format(query, sizeof(query), "SELECT gehalt FROM jobs WHERE jobid=%i",playerdata[playerid][2]);
-		mysql_tquery(query);
-		mysql_store_result();
-		mysql_fetch_row(data);
-		mysql_fetch_field("gehalt",data);
+		new Cache:cache = mysql_query(g_sql, query);
+		cache_get_row_count(data);
+		cache_get_value_index("gehalt",data);
 		playerdata[playerid][19] = strval(data);
 	}
 	return 1;
@@ -641,10 +638,10 @@ public setuserjob(playerid,jobid)
 
 public payday(playerid)
 {
-    //userlevel erhöhung , Skill erhöhung, Gehaltszahlung, Überprüfung Gesundheit und Waffen
+    //userlevel erhÑ†hung , Skill erhÑ†hung, Gehaltszahlung, Ð¬berprÑŒfung Gesundheit und Waffen
     new string[100],Float:j,weaponid,ammo,weaponslot,reset = 0,slots[] = {0,0,0,0,0,0,0,0,0};
 	
-    //userlevel erhöhung nach 300 Spielminuten jeweils
+    //userlevel erhÑ†hung nach 300 Spielminuten jeweils
     if((playerdata[playerid][7]+1) % 300 == 0)
     {
 		playerdata[playerid][6]++;
@@ -652,16 +649,16 @@ public payday(playerid)
 		SendClientMessage(playerid, COLOR_PAYDAY, string);
 	}
     
-    //Skilllevel je nach Job erhöhen
+    //Skilllevel je nach Job erhÑ†hen
     new aufstieg = skilllevelcheck(playerid,playerdata[playerid][2]);
 	
     if(aufstieg > 0)
     {
-		format(string,100,"Berufserfahrung erhöht! Sie haben Stufe %i erreicht.",aufstieg);
+		format(string,100,"Berufserfahrung erhÑ†ht! Sie haben Stufe %i erreicht.",aufstieg);
 		SendClientMessage(playerid, COLOR_PAYDAY, string);
 	}
     
-    //Zahltag für alle jobs wenn paydaycount einen bestimmten Wert erreicht + Zinsen nur wenn gearbeitet 1,8 %
+    //Zahltag fÑŒr alle jobs wenn paydaycount einen bestimmten Wert erreicht + Zinsen nur wenn gearbeitet 1,8 %
     if((playerdata[playerid][7]+1) % 60 == 0)
     {
 		aufstieg = 0;
@@ -703,19 +700,19 @@ public payday(playerid)
 			if(playerdata[playerid][56] == 1) playerdata[playerid][5] = floatround(playerdata[playerid][5] * 1.025);
 			else playerdata[playerid][5] = floatround(playerdata[playerid][5] * 1.018);
 			
-			format(string,100,"%i$ + Zinsen wurden auf dein Konto überwiesen",playerdata[playerid][19]);
+			format(string,100,"%i$ + Zinsen wurden auf dein Konto ÑŒberwiesen",playerdata[playerid][19]);
 			SendClientMessage(playerid, COLOR_PAYDAY, string);
 			
 			if(playerdata[playerid][68] > 0)
 			{
-				format(string,100,"Miete für den nächsten Monat wurde überwiesen. (-%i) ",playerdata[playerid][68]);
+				format(string,100,"Miete fÑŒr den nÐ´chsten Monat wurde ÑŒberwiesen. (-%i) ",playerdata[playerid][68]);
 				playerdata[playerid][5] = playerdata[playerid][5] - playerdata[playerid][68];
 				SendClientMessage(playerid, COLOR_PAYDAY, string);
 			}
 			
 			if(playerdata[playerid][69] > 0)
 			{
-				format(string,100,"Versicherungsbeiträge wurden überwiesen. (-%i) ",playerdata[playerid][69]);
+				format(string,100,"VersicherungsbeitrÐ´ge wurden ÑŒberwiesen. (-%i) ",playerdata[playerid][69]);
 				playerdata[playerid][5] = playerdata[playerid][5] - playerdata[playerid][69];
 				SendClientMessage(playerid, COLOR_PAYDAY, string);
 			}
@@ -731,19 +728,19 @@ public payday(playerid)
 			if(playerdata[playerid][56] == 1) playerdata[playerid][5] = floatround(playerdata[playerid][5] * 1.015);
 			else playerdata[playerid][5] = floatround(playerdata[playerid][5] * 1.008);
 			
-			format(string,100,"100$ + Zinsen wurden auf dein Konto überwiesen");
+			format(string,100,"100$ + Zinsen wurden auf dein Konto ÑŒberwiesen");
 			SendClientMessage(playerid, COLOR_PAYDAY, string);
 			
 			if(playerdata[playerid][68] > 0)
 			{
-				format(string,100,"Miete für den nächsten Monat wurde überwiesen. (-%i) ",playerdata[playerid][68]);
+				format(string,100,"Miete fÑŒr den nÐ´chsten Monat wurde ÑŒberwiesen. (-%i) ",playerdata[playerid][68]);
 				playerdata[playerid][5] = playerdata[playerid][5] - playerdata[playerid][68];
 				SendClientMessage(playerid, COLOR_PAYDAY, string);
 			}
 			
 			if(playerdata[playerid][69] > 0)
 			{
-				format(string,100,"Versicherungsbeiträge wurden überwiesen. (-%i) ",playerdata[playerid][69]);
+				format(string,100,"VersicherungsbeitrÐ´ge wurden ÑŒberwiesen. (-%i) ",playerdata[playerid][69]);
 				playerdata[playerid][5] = playerdata[playerid][5] - playerdata[playerid][69];
 				SendClientMessage(playerid, COLOR_PAYDAY, string);
 			}
@@ -755,17 +752,17 @@ public payday(playerid)
 		}
 	}
     
-    //Bargeld überprüfen
+    //Bargeld ÑŒberprÑŒfen
     if(GetPlayerMoney(playerid) > playerdata[playerid][4]) {ResetPlayerMoney(playerid);GivePlayerMoney(playerid,playerdata[playerid][4]);}
     else if(GetPlayerMoney(playerid) < playerdata[playerid][4]){playerdata[playerid][4] = GetPlayerMoney(playerid);}
     
-    //Gesundheit überprüfen und verlieren 7% (max 5 min 2)
+    //Gesundheit ÑŒberprÑŒfen und verlieren 7% (max 5 min 2)
     j = (playerdata[playerid][17]/100 * 7);
     if(j > 5) j = 5; else if(j < 2) j = 2;
     SetPlayerHealth(playerid, (playerdata[playerid][17]-j));
     playerdata[playerid][17] = floatround(playerdata[playerid][17]-j);
     
-    //WaffenSlotsüberprüfen
+    //WaffenSlotsÑŒberprÑŒfen
     weaponslot = getweaponslot(playerdata[playerid][11]);
     GetPlayerWeaponData(playerid,WEAPON_SLOT:weaponslot,WEAPON:weaponid,ammo);
     if(weaponid != playerdata[playerid][11]) reset = 1;
@@ -819,7 +816,7 @@ public payday(playerid)
 		SetPlayerWantedLevel(playerid, playerdata[playerid][35]);
 	}
     
-	//Gefängnistimer
+	//GefÐ´ngnistimer
 	if(playerdata[playerid][35] == 0 && playerdata[playerid][55] == 1)
 	{
 		SetPlayerInterior(playerid, 0);
@@ -842,7 +839,7 @@ public payday(playerid)
 			new output[128];
 			if(mietwagen[i][10] < 6)
 			{
-				format(output, sizeof(output), "*** Ihr Mietvertrag läuft in %i Minuten ab. ***", floatround(mietwagen[i][10]));
+				format(output, sizeof(output), "*** Ihr Mietvertrag lÐ´uft in %i Minuten ab. ***", floatround(mietwagen[i][10]));
 				SendClientMessage(playerid, COLOR_YELLOW, output);
 			}
 		}
@@ -860,13 +857,13 @@ public payday(playerid)
 			if(mietwagen_alive[i][0] == true)
 			{
 				giveusermoney(playerid, 500);
-				SendClientMessage(playerid, COLOR_YELLOW, "*** Die Kaution wurde Ihnen zurückerstattet ***");
+				SendClientMessage(playerid, COLOR_YELLOW, "*** Die Kaution wurde Ihnen zurÑŒckerstattet ***");
 				mietwagen_alive[i][0] = false;
 			}
 		}
 	}
 	
-    //playtime um eine Minute erhöhen
+    //playtime um eine Minute erhÑ†hen
     playerdata[playerid][7]++;
     
     //Textdraws updaten
@@ -917,16 +914,15 @@ public sendmessagetoallplayer(msg[],senderid,style,werbeid)
     {
 		new query[128],data[125],output[250]= "Werbung: ";
 		format(query, sizeof(query), "SELECT `accname`,`playerid`,`msg` FROM `accounts` JOIN `werbung` WHERE werbung.playerid=accounts.accid AND werbungid=%i", werbeid);
-		mysql_tquery(query);
-		mysql_store_result();
-		mysql_fetch_row(data);
-		mysql_fetch_field("msg",data);
+		new Cache:cache = mysql_query(g_sql, query);
+		cache_get_row_count(data);
+		cache_get_value_index("msg",data);
 		strcat(output,data);
 		strcat(output," (Abs: ");
-		mysql_fetch_field("accname",data);
+		cache_get_value_index("accname",data);
 		strcat(output,data);
 		strcat(output," Tel: ");
-		mysql_fetch_field("playerid",data);
+		cache_get_value_index("playerid",data);
 		strcat(output,data);
 		strcat(output,")");
 		SendClientMessageToAll(0x009C00FF, output);
@@ -953,7 +949,7 @@ public actionmenu(playerid)
 		strcat(output,"Motorhaube auf / zu \n");
 	}
 	
-	ShowPlayerDialog(playerid,97,DIALOG_STYLE_LIST , "Aktion", output, "Auswählen", "Abbrechen");
+	ShowPlayerDialog(playerid,97,DIALOG_STYLE_LIST , "Aktion", output, "AuswÐ´hlen", "Abbrechen");
 }
 
 public jobaction(playerid)
@@ -966,14 +962,14 @@ public jobaction(playerid)
 		strcat(output,"Fahrstunde nicht bestanden\n");
 		strcat(output,"Starterlaubis beantragen\n");
 		strcat(output,"Landeerlaubis beantragen\n");
-		ShowPlayerDialog(playerid,1011,DIALOG_STYLE_LIST , "Aktion", output, "Auswählen", "Abbrechen");
+		ShowPlayerDialog(playerid,1011,DIALOG_STYLE_LIST , "Aktion", output, "AuswÐ´hlen", "Abbrechen");
 	}
 	if(playerdata[playerid][2] == 7)
 	{
-		strcat(output,"Fahrpreis ändern (Bei KEINEM Fahrgast im Auto!)\n");
+		strcat(output,"Fahrpreis Ð´ndern (Bei KEINEM Fahrgast im Auto!)\n");
 		strcat(output,"Job abbrechen (Bei Fahrgast im Auto)\n");
-		strcat(output,"Job beenden (Auto zurückbringen)\n");
-		ShowPlayerDialog(playerid,1011,DIALOG_STYLE_LIST , "Aktion", output, "Auswählen", "Abbrechen");
+		strcat(output,"Job beenden (Auto zurÑŒckbringen)\n");
+		ShowPlayerDialog(playerid,1011,DIALOG_STYLE_LIST , "Aktion", output, "AuswÐ´hlen", "Abbrechen");
 	}
 }
 
@@ -1031,7 +1027,7 @@ public user_stats(playerid)
 		format(update, sizeof(update), "{FFFFFF}%i{FFB400} Minuten\t", m);
 		strcat(playtime, update, sizeof(playtime));
 	}
-	// Führerscheinklassen
+	// FÑŒhrerscheinklassen
 	if(playerdata[playerid][21] == 1) strcat(fekl,"- Motorrad\n");
 	if(playerdata[playerid][22] == 1) strcat(fekl,"- PKW\n");
 	if(playerdata[playerid][23] == 1) strcat(fekl,"- LKW (C)\n");
@@ -1044,12 +1040,11 @@ public user_stats(playerid)
 	GetPlayerName(playerid, pname, sizeof(pname));
 	// Beruf
 	format(mysqli, sizeof(mysqli), "SELECT jName, gehalt FROM jobs WHERE jobid = %i", playerdata[playerid][2]);
-	mysql_tquery(mysqli);
-	mysql_store_result();
-	mysql_fetch_row(mysqli);
-	mysql_fetch_field("jName",mysqli);
+	new Cache:cache = mysql_query(g_sql, mysqli);
+	cache_get_row_count(mysqli);
+	cache_get_value_index("jName",mysqli);
 	jName = mysqli;
-	mysql_fetch_field("gehalt", mysqli);
+	cache_get_value_index("gehalt", mysqli);
 	gehalt = strval(mysqli);
 	// Finanzen
 	// Ausgabe	
@@ -1074,7 +1069,7 @@ public user_stats(playerid)
 	strcat(info, infozeile, sizeof(info));
 	format(infozeile, sizeof(infozeile), "{FFB400}Beruf: {FFFFFF}%s{FFB400}\nGrundgehalt: {FFFFFF}%i{FFB400}\nErfahrung: {FFFFFF}%i{FFB400}\n\n", jName, gehalt, playerdata[playerid][3]);
 	strcat(info, infozeile, sizeof(info));
-	format(infozeile, sizeof(infozeile), "{FF6E00}Führerscheine\n");
+	format(infozeile, sizeof(infozeile), "{FF6E00}FÑŒhrerscheine\n");
 	strcat(info, infozeile, sizeof(info));
 	format(infozeile, sizeof(infozeile), "{FFB400}%s{FFFFFF}", fekl);
 	strcat(info, infozeile, sizeof(info));
