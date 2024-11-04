@@ -32,7 +32,7 @@ new Float:shopsinter[][11]=
   {1.0,678.09, -451.80, -25.41,681.45, -451.16, -25.61,677.76, -463.53, -25.61, 360.0}, // Welcome Pump
   {4.0, 450.41, -83.65, 999.55,460.44, -89.00, 999.55,453.81, -90.74, 999.55, 52.03}, // Jays Diner
   {18.0,-225.03, 1404.20, 27.77,-229.29, 1401.05, 27.76,-226.00, 1410.31, 27.77, 187.35}, //Lil Probe Inn
-  {17.0,379.32, -190.44, 1000.63,377.01, -193.30, 1000.63, 376.04, -178.73, 1000.63, 209.95}, //Donat Läden
+  {17.0,379.32, -190.44, 1000.63,377.01, -193.30, 1000.63, 376.04, -178.73, 1000.63, 209.95}, //Donat LÐ´den
   {15.0,217.74, -98.32, 1005.25,207.65, -111.26, 1005.13, 205.64, -105.54, 1005.13,300.0}, //Binco
   { 3.0,200.24,-131.29, 1003.50,207.46, -140.37, 1003.50, 206.46, -137.03, 1002.87,356.26}, //Prolaps
   {18.0,181.35, -87.83, 1002.02,161.25,  -97.11, 1001.80, 161.39,  -93.16, 1001.81,300.0}, //zip
@@ -180,13 +180,12 @@ new playerwaehltskin[MAX_PLAYERS];
 public burgershot()
 {
   new data[150],label[150];
-  mysql_query("SELECT name FROM burgershot ORDER BY shopID");
-  mysql_store_result();
+  new Cache:cache = mysql_query(g_sql, "SELECT name FROM burgershot ORDER BY shopID");
   for(new i= 0; i < sizeof(shopsenter);i++)
   {
-    if(mysql_fetch_row(data))
+    if(cache_get_row_count(data))
     {
-      mysql_fetch_field("name",data);
+      cache_get_value_index("name",data);
       if(i < 10)
 	  {
         format(label,150,"Burgershot \n %s \n betreten",data);
@@ -239,23 +238,21 @@ public burgershot()
     shopsleavingpick[i] = CreatePickup(1559,1,shopsinter[i][4], shopsinter[i][5], shopsinter[i][6],-1);
     shopssellingpick[i] = CreatePickup(1239,1,shopsinter[i][1], shopsinter[i][2], shopsinter[i][3],-1);
   }
-  ;
 }
 
 public essen(playerid, listitem, bsID)
 {
   new data[20],price[50],query[150];
   format(query, sizeof(query), "SELECT preis1,preis2,preis3,bestand FROM burgershot WHERE shopID = %i",bsID);
-  mysql_query(query);
-  mysql_store_result();
-  mysql_fetch_field("bestand",data);
+  new Cache:cache = mysql_query(g_sql, query);
+  cache_get_value_index("bestand",data);
   if(bsID < 11)
   {
     if(listitem == 0)
     {
       if(strval(data) >= 1)
       {
-        mysql_fetch_field("preis1",price);
+        cache_get_value_index("preis1",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,20.0,0,1000);
@@ -269,7 +266,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 2)
       {
-        mysql_fetch_field("preis2",price);
+        cache_get_value_index("preis2",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,35.0,0,3000);
@@ -283,7 +280,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 4)
       {
-        mysql_fetch_field("preis3",price);
+        cache_get_value_index("preis3",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,65.0,0,5000);
@@ -300,7 +297,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 1)
       {
-        mysql_fetch_field("preis1",price);
+        cache_get_value_index("preis1",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,20.0,1,1000);
@@ -314,7 +311,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 2)
       {
-        mysql_fetch_field("preis2",price);
+        cache_get_value_index("preis2",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,35.0,1,3000);
@@ -328,7 +325,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 4)
       {
-        mysql_fetch_field("preis3",price);
+        cache_get_value_index("preis3",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,65.0,1,5000);
@@ -345,7 +342,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 1)
       {
-        mysql_fetch_field("preis1",price);
+        cache_get_value_index("preis1",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,20.0,2,1000);
@@ -359,7 +356,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 2)
       {
-        mysql_fetch_field("preis2",price);
+        cache_get_value_index("preis2",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,35.0,2,3000);
@@ -373,7 +370,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 4)
       {
-        mysql_fetch_field("preis3",price);
+        cache_get_value_index("preis3",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,65.0,2,5000);
@@ -390,7 +387,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 1)
       {
-        mysql_fetch_field("preis1",price);
+        cache_get_value_index("preis1",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,5.0,3,1000);
@@ -404,7 +401,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 2)
       {
-        mysql_fetch_field("preis2",price);
+        cache_get_value_index("preis2",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,7.0,3,3000);
@@ -418,7 +415,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 4)
       {
-        mysql_fetch_field("preis3",price);
+        cache_get_value_index("preis3",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,10.0,3,5000);
@@ -435,7 +432,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 1)
       {
-        mysql_fetch_field("preis1",price);
+        cache_get_value_index("preis1",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,5.0,3,1000);
@@ -449,7 +446,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 2)
       {
-        mysql_fetch_field("preis2",price);
+        cache_get_value_index("preis2",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,7.0,3,3000);
@@ -463,7 +460,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 4)
       {
-        mysql_fetch_field("preis3",price);
+        cache_get_value_index("preis3",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,10.0,3,5000);
@@ -480,7 +477,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 2)
       {
-        mysql_fetch_field("preis1",price);
+        cache_get_value_index("preis1",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,25.0,4,3000);
@@ -494,7 +491,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 4)
       {
-        mysql_fetch_field("preis2",price);
+        cache_get_value_index("preis2",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,37.0,4,7000);
@@ -508,7 +505,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 6)
       {
-        mysql_fetch_field("preis3",price);
+        cache_get_value_index("preis3",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,75.0,4,10000);
@@ -525,7 +522,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 1)
       {
-        mysql_fetch_field("preis1",price);
+        cache_get_value_index("preis1",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,5.0,2,3000);
@@ -539,7 +536,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 2)
       {
-        mysql_fetch_field("preis2",price);
+        cache_get_value_index("preis2",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,7.0,2,7000);
@@ -553,7 +550,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 4)
       {
-        mysql_fetch_field("preis3",price);
+        cache_get_value_index("preis3",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,15.0,2,10000);
@@ -625,7 +622,7 @@ public essen(playerid, listitem, bsID)
         GameTextForPlayer(playerid, "~r~Erst ab Level 1 erlaubt!", 3000, 1);
 	  else if(playerdata[playerid][70] >= 3 || (playerdata[playerid][70] >= 5 && playerdata[playerid][56] == 1))
 		GameTextForPlayer(playerid, "~r~Kleidungswechsel nicht erlaubt!", 3000, 1);
-      else GameTextForPlayer(playerid, "~r~Geschäft ausverkauft!", 3000, 1);
+      else GameTextForPlayer(playerid, "~r~GeschÐ´ft ausverkauft!", 3000, 1);
     }
   }
   else if(bsID >= 68 && bsID <= 70)
@@ -666,7 +663,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 5 && playerdata[playerid][72] < 3)
       {
-        mysql_fetch_field("preis1",price);
+        cache_get_value_index("preis1",price);
         if(giveusermoney(playerid,-1*strval(price)))
         {
           playerdata[playerid][72]++;
@@ -682,7 +679,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 10 && playerdata[playerid][72] < 2)
       {
-        mysql_fetch_field("preis2",price);
+        cache_get_value_index("preis2",price);
         if(giveusermoney(playerid,-1*strval(price)))
         {
           playerdata[playerid][72]++;
@@ -698,7 +695,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 50 && playerdata[playerid][10] == 0)
       {
-        mysql_fetch_field("preis3",price);
+        cache_get_value_index("preis3",price);
         if(giveusermoney(playerid,-1*strval(price)))
         {
           playerdata[playerid][10] = 1;
@@ -717,7 +714,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 25)
       {
-		mysql_fetch_field("preis1",price);
+		cache_get_value_index("preis1",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           GivePlayerWeapon(playerid, WEAPON:11, 0);
@@ -733,7 +730,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 35)
       {
-		mysql_fetch_field("preis2",price);
+		cache_get_value_index("preis2",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           GivePlayerWeapon(playerid, WEAPON:13, 0);
@@ -749,7 +746,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 50)
       {
-		mysql_fetch_field("preis3",price);
+		cache_get_value_index("preis3",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           GivePlayerWeapon(playerid, WEAPON:10, 0);
@@ -768,7 +765,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 10)
       {
-        mysql_fetch_field("preis1",price);
+        cache_get_value_index("preis1",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,1.0,3,3000);
@@ -782,7 +779,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 20)
       {
-        mysql_fetch_field("preis2",price);
+        cache_get_value_index("preis2",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,2.0,3,7000);
@@ -796,7 +793,7 @@ public essen(playerid, listitem, bsID)
     {
       if(strval(data) >= 30)
       {
-        mysql_fetch_field("preis3",price);
+        cache_get_value_index("preis3",price);
         if(giveusermoney(playerid,-1 * strval(price)))
         {
           playereat(playerid,5.0,3,10000);
@@ -825,11 +822,11 @@ public freiew_response(playerid, dialogid, response, listitem, inputtext[])
       new query[250],data[250];
       format(query, sizeof(query), "SELECT preis1,bestand FROM burgershot WHERE shopID = %i",(playerinshop[playerid]+1));
       mysql_query(query);
-      mysql_store_result();
-      mysql_fetch_field("bestand",data);
+      mysql_store_result(g_sql);
+      cache_get_value_index("bestand",data);
       if(strval(data) >= 50)
       {
-        mysql_fetch_field("preis1",data);
+        cache_get_value_index("preis1",data);
         if(giveusermoney(playerid,-1*strval(data)))
         {
           GameTextForPlayer(playerid, "~g~ Kleidung gekauft!", 3000, 1);
@@ -848,72 +845,72 @@ public freiew_response(playerid, dialogid, response, listitem, inputtext[])
     new query[150],data[150],data2[150],data3[50],weapon;
     format(query,150,"SELECT * FROM ammunation WHERE shopid=%i",(playerinshop[playerid]+1));
     mysql_query(query);
-    mysql_store_result();
+    mysql_store_result(g_sql);
     
     if(listitem == 0)
     {
-      mysql_fetch_field("preis_9mm",data);
-	  mysql_fetch_field("bestand_9mm",data2);
+      cache_get_value_index("preis_9mm",data);
+	  cache_get_value_index("bestand_9mm",data2);
       data3 = "bestand_9mm";
       weapon = 22;
     }
     else if(listitem == 1)
     {
-      mysql_fetch_field("preis_silenced9mm",data);
-	  mysql_fetch_field("bestand_silenced9mm",data2);
+      cache_get_value_index("preis_silenced9mm",data);
+	  cache_get_value_index("bestand_silenced9mm",data2);
       data3 = "bestand_silenced9mm";
       weapon = 23;
     }
     else if(listitem == 2)
     {
-      mysql_fetch_field("preis_deserteagle",data);
-	  mysql_fetch_field("bestand_deserteagle",data2);
+      cache_get_value_index("preis_deserteagle",data);
+	  cache_get_value_index("bestand_deserteagle",data2);
       data3 = "bestand_deserteagle";
       weapon = 24;
     }
     else if(listitem == 3)
     {
-      mysql_fetch_field("preis_nightstick",data);
-	  mysql_fetch_field("bestand_nightstick",data2);
+      cache_get_value_index("preis_nightstick",data);
+	  cache_get_value_index("bestand_nightstick",data2);
       data3 = "bestand_nightstick";
       weapon = 3;
     }
     else if(listitem == 4)
     {
-      mysql_fetch_field("preis_knife",data);
-	  mysql_fetch_field("bestand_knife",data2);
+      cache_get_value_index("preis_knife",data);
+	  cache_get_value_index("bestand_knife",data2);
       data3 = "bestand_knife";
       weapon = 4;
     }
     else if(listitem == 5)
     {
-      mysql_fetch_field("preis_katana",data);
-	  mysql_fetch_field("bestand_katana",data2);
+      cache_get_value_index("preis_katana",data);
+	  cache_get_value_index("bestand_katana",data2);
       data3 = "bestand_katana";
       weapon = 8;
     }
     else if(listitem == 6)
     {
-      mysql_fetch_field("preis_mun",data);
-	  mysql_fetch_field("bestand_mun",data2);
+      cache_get_value_index("preis_mun",data);
+	  cache_get_value_index("bestand_mun",data2);
       data3 = "bestand_mun";
     }
     else if(listitem == 7)
     {
-      mysql_fetch_field("preis_lowarmor",data);
-	  mysql_fetch_field("bestand_lowarmor",data2);
+      cache_get_value_index("preis_lowarmor",data);
+	  cache_get_value_index("bestand_lowarmor",data2);
       data3 = "bestand_lowarmor";
     }
     else if(listitem == 8)
     {
-      mysql_fetch_field("preis_normalarmor",data);
-	  mysql_fetch_field("bestand_normalarmor",data2);
+      cache_get_value_index("preis_normalarmor",data);
+	  cache_get_value_index("bestand_normalarmor",data2);
       data3 = "bestand_normalarmor";
     }
     else if(listitem == 9)
     {
-      mysql_fetch_field("preis_bigarmor",data);
-	  mysql_fetch_field("bestand_bigarmor",data2);
+      cache_get_value_index("preis_bigarmor",data);
+	  cache_get_value_index("bestand_bigarmor",data2);
       data3 = "bestand_bigarmor";
     }
     ;
@@ -1070,15 +1067,15 @@ public freiew_pickups(playerid,pickupid)
       new query[150],data[150],output[250],headline[50],string[150],bestand,preis1,preis2,preis3;
       format(query,150,"SELECT preis1,preis2,preis3,bestand FROM burgershot WHERE shopid=%i",(playerinshop[playerid]+1));
       mysql_query(query);
-      mysql_store_result();
-      mysql_fetch_row(data);
-      mysql_fetch_field("bestand",data);
+      mysql_store_result(g_sql);
+      cache_get_row_count(data);
+      cache_get_value_index("bestand",data);
       bestand = strval(data);
-      mysql_fetch_field("preis1",data);
+      cache_get_value_index("preis1",data);
       preis1 = strval(data);
-      mysql_fetch_field("preis2",data);
+      cache_get_value_index("preis2",data);
       preis2 = strval(data);
-      mysql_fetch_field("preis3",data);
+      cache_get_value_index("preis3",data);
       preis3 = strval(data);
       
       if(bestand >= 1 && i < 1)
@@ -1153,25 +1150,25 @@ public freiew_pickups(playerid,pickupid)
       else if(i < 4)
         format(string,150,"{FF0000}Kein Wodka im Lager.\n");
       else if(bestand >= 2 && i < 5)
-        format(string,150,"Likör (%i $) \n",preis2);
+        format(string,150,"LikÑ†r (%i $) \n",preis2);
       else if(i < 5)
-        format(string,150,"{FF0000}Kein Likör im Lager.\n");
+        format(string,150,"{FF0000}Kein LikÑ†r im Lager.\n");
       else if(bestand >= 4 && i < 6)
         format(string,150,"Bier und ein Putenbrustfilet(%i $) \n",preis2);
       else if(i < 6)
         format(string,150,"{FF0000}Das Gericht ist nicht im Lager. \n");
       else if(bestand >= 2 && i < 7)
-        format(string,150,"Likör (%i $) \n",preis2);
+        format(string,150,"LikÑ†r (%i $) \n",preis2);
       else if(i < 7)
-        format(string,150,"{FF0000}Kein Likör im Lager.\n");
+        format(string,150,"{FF0000}Kein LikÑ†r im Lager.\n");
       else if(bestand >= 4 && i < 8)
         format(string,150,"Bier und ein Putenbrustfilet(%i $) \n",preis2);
       else if(i < 8)
         format(string,150,"{FF0000}Das Gericht ist nicht im Lager.\n");
       else if(bestand >= 2 && i < 9)
-        format(string,150,"Likör (%i $) \n",preis2);
+        format(string,150,"LikÑ†r (%i $) \n",preis2);
       else if(i < 9)
-        format(string,150,"{FF0000}Kein Likör im Lager.\n");
+        format(string,150,"{FF0000}Kein LikÑ†r im Lager.\n");
       else if(bestand >= 2 && i < 10)
         format(string,150,"Donut mit Schokolade (%i $) \n",preis2);
       else if(i < 10)
@@ -1206,13 +1203,13 @@ public freiew_pickups(playerid,pickupid)
       else if(bestand >= 4 && i == 3)
         format(string,150,"Cocktail (%i $) \n",preis3);
       else if(i == 3)
-        format(string,150,"{FF0000}Das Getränk ist nicht vorrätig.\n");
+        format(string,150,"{FF0000}Das GetrÐ´nk ist nicht vorrÐ´tig.\n");
       else if(bestand >= 4 && i == 4)
         format(string,150,"Whisky (%i $) \n",preis3);
       else if(i == 4)
         format(string,150,"{FF0000}Kein Whisky im Lager.\n");
       else if(bestand >= 6 && i == 5)
-        format(string,150,"Wein und ein 3 Gänge Menü(%i $) \n",preis3);
+        format(string,150,"Wein und ein 3 GÐ´nge MenÑŒ(%i $) \n",preis3);
       else if(i == 5)
         format(string,150,"{FF0000}Das Gericht steht nicht zur Wahl.\n");
       else if(bestand >= 4 && i == 6)
@@ -1220,7 +1217,7 @@ public freiew_pickups(playerid,pickupid)
       else if(i == 6)
         format(string,150,"{FF0000}Whisky ist nicht im Lager.\n");
       else if(bestand >= 4 && i == 7)
-        format(string,150,"Wein und 3 Gänge Menü (%i $) \n",preis3);
+        format(string,150,"Wein und 3 GÐ´nge MenÑŒ (%i $) \n",preis3);
       else if(i == 7)
         format(string,150,"{FF0000}Das Gericht steht nicht zur Wahl.\n");
       else if(bestand >= 4 && i == 8)
@@ -1228,17 +1225,17 @@ public freiew_pickups(playerid,pickupid)
       else if(i == 8)
         format(string,150,"{FF0000}Kein Wodka im Lager\n");
       else if(bestand >= 4 && i == 9)
-        format(string,150,"Donut mit Likörfüllung (%i $) \n",preis3);
+        format(string,150,"Donut mit LikÑ†rfÑŒllung (%i $) \n",preis3);
       else if(i == 9)
         format(string,150,"{FF0000}Donut ausverkauft.\n");
 	  else if(bestand >= 50 && i >= 10 && i <= 15 && (playerdata[playerid][70] < 5 || (playerdata[playerid][70] < 8 && playerdata[playerid][56] == 1)))
         format(string,150,"Neue Kleidung kaufen (%i $) \n",preis1);
 	  else if(i >= 10 && i <= 15 && (playerdata[playerid][70] >= 5 || (playerdata[playerid][70] >= 8 && playerdata[playerid][56] == 1)))
-        format(string,150,"{FF0000}Sie dürfen nicht so oft ihre Kleidung wechseln.\n",preis1);
+        format(string,150,"{FF0000}Sie dÑŒrfen nicht so oft ihre Kleidung wechseln.\n",preis1);
       else if(bestand >= 50 && i >= 16 && i <= 21 && playerdata[playerid][10] == 0)
         format(string,150,"Smartphone kaufen (%i $) \n",preis3);
 	  else if(i >= 16 && i <= 21)
-        format(string,150,"{FF0000}Sie können kein Smartphone kaufen.\n",preis3);
+        format(string,150,"{FF0000}Sie kÑ†nnen kein Smartphone kaufen.\n",preis3);
       else if(bestand >= 50 && i == 22)
         format(string,150,"Doppel-Dildo kaufen (%i $) \n",preis1);
       else if(i == 22)
@@ -1248,7 +1245,7 @@ public freiew_pickups(playerid,pickupid)
 	  else if(i >= 23 && i <= 25)
         format(string,150,"Flasche Champagner ausverkauft \n");
       else
-        format(string,150,"{FF0000}Geschäft ausverkauft.\n");
+        format(string,150,"{FF0000}GeschÐ´ft ausverkauft.\n");
       strcat(output,string);
       
       ;
@@ -1260,7 +1257,7 @@ public freiew_pickups(playerid,pickupid)
 	  else if(i < 16) headline = "Kleidung kaufen";
       else if(i < 22) headline = "24-7 einkaufen";
       else if(i < 23) headline = "Sex Shop einkaufen";
-	  else if(i < 26) headline = "Strip Club Getränkekarte";
+	  else if(i < 26) headline = "Strip Club GetrÐ´nkekarte";
       ShowPlayerDialog(playerid,1001,DIALOG_STYLE_LIST , headline, output, "Bestellen", "Abbrechen");
     }
 	else if(pickupid == shopssellingpick[i] && i >= 26)
@@ -1269,65 +1266,65 @@ public freiew_pickups(playerid,pickupid)
       new query[150],data[150],data2[150],output[500],string[150];
       format(query,150,"SELECT * FROM ammunation WHERE shopid=%i",(playerinshop[playerid]+1));
       mysql_query(query);
-      mysql_store_result();
+      mysql_store_result(g_sql);
 	  
-	  mysql_fetch_field("preis_9mm",data);
-	  mysql_fetch_field("bestand_9mm",data2);
-	  if(strval(data2) > 0) data2 = "vorrätig"; else data2 = "ausverkauft";
+	  cache_get_value_index("preis_9mm",data);
+	  cache_get_value_index("bestand_9mm",data2);
+	  if(strval(data2) > 0) data2 = "vorrÐ´tig"; else data2 = "ausverkauft";
 	  format(string,150,"Pistole: 9mm (%i $) (%s) \n",strval(data),data2);
 	  strcat(output,string);
 	  
-	  mysql_fetch_field("preis_silenced9mm",data);
-	  mysql_fetch_field("bestand_silenced9mm",data2);
-	  if(strval(data2) > 0) data2 = "vorrätig"; else data2 = "ausverkauft";
-	  format(string,150,"Pistole: 9mm schallgedämpft (%i $) (%s) \n",strval(data),data2);
+	  cache_get_value_index("preis_silenced9mm",data);
+	  cache_get_value_index("bestand_silenced9mm",data2);
+	  if(strval(data2) > 0) data2 = "vorrÐ´tig"; else data2 = "ausverkauft";
+	  format(string,150,"Pistole: 9mm schallgedÐ´mpft (%i $) (%s) \n",strval(data),data2);
 	  strcat(output,string);
 	  
-	  mysql_fetch_field("preis_deserteagle",data);
-	  mysql_fetch_field("bestand_deserteagle",data2);
-	  if(strval(data2) > 0) data2 = "vorrätig"; else data2 = "ausverkauft";
+	  cache_get_value_index("preis_deserteagle",data);
+	  cache_get_value_index("bestand_deserteagle",data2);
+	  if(strval(data2) > 0) data2 = "vorrÐ´tig"; else data2 = "ausverkauft";
 	  format(string,150,"Pistole: Desert Eagle (%i $) (%s) \n",strval(data),data2);
 	  strcat(output,string);
 	  
-	  mysql_fetch_field("preis_nightstick",data);
-	  mysql_fetch_field("bestand_nightstick",data2);
-	  if(strval(data2) > 0) data2 = "vorrätig"; else data2 = "ausverkauft";
+	  cache_get_value_index("preis_nightstick",data);
+	  cache_get_value_index("bestand_nightstick",data2);
+	  if(strval(data2) > 0) data2 = "vorrÐ´tig"; else data2 = "ausverkauft";
 	  format(string,150,"Nahkampf: Schlagstock (%i $) (%s) \n",strval(data),data2);
 	  strcat(output,string);
 	  
-	  mysql_fetch_field("preis_knife",data);
-	  mysql_fetch_field("bestand_knife",data2);
-	  if(strval(data2) > 0) data2 = "vorrätig"; else data2 = "ausverkauft";
+	  cache_get_value_index("preis_knife",data);
+	  cache_get_value_index("bestand_knife",data2);
+	  if(strval(data2) > 0) data2 = "vorrÐ´tig"; else data2 = "ausverkauft";
 	  format(string,150,"Nahkampf: Messer (%i $) (%s) \n",strval(data),data2);
 	  strcat(output,string);
 	  
-	  mysql_fetch_field("preis_katana",data);
-	  mysql_fetch_field("bestand_katana",data2);
-	  if(strval(data2) > 0) data2 = "vorrätig"; else data2 = "ausverkauft";
+	  cache_get_value_index("preis_katana",data);
+	  cache_get_value_index("bestand_katana",data2);
+	  if(strval(data2) > 0) data2 = "vorrÐ´tig"; else data2 = "ausverkauft";
 	  format(string,150,"Nahkampf: Samuraischwert (%i $) (%s) \n",strval(data),data2);
 	  strcat(output,string);
 	  
-	  mysql_fetch_field("preis_mun",data);
-	  mysql_fetch_field("bestand_mun",data2);
-	  if(strval(data2) > 10) data2 = "vorrätig"; else data2 = "ausverkauft";
-	  format(string,150,"Munition für Pistolen 10 Stück (%i $) (%s) \n",strval(data),data2);
+	  cache_get_value_index("preis_mun",data);
+	  cache_get_value_index("bestand_mun",data2);
+	  if(strval(data2) > 10) data2 = "vorrÐ´tig"; else data2 = "ausverkauft";
+	  format(string,150,"Munition fÑŒr Pistolen 10 StÑŒck (%i $) (%s) \n",strval(data),data2);
 	  strcat(output,string);
 	  
-	  mysql_fetch_field("preis_lowarmor",data);
-	  mysql_fetch_field("bestand_lowarmor",data2);
-	  if(strval(data2) > 0) data2 = "vorrätig"; else data2 = "ausverkauft";
+	  cache_get_value_index("preis_lowarmor",data);
+	  cache_get_value_index("bestand_lowarmor",data2);
+	  if(strval(data2) > 0) data2 = "vorrÐ´tig"; else data2 = "ausverkauft";
 	  format(string,150,"Schutzweste: leicht (%i $) (%s) \n",strval(data),data2);
 	  strcat(output,string);
 	  
-	  mysql_fetch_field("preis_normalarmor",data);
-	  mysql_fetch_field("bestand_normalarmor",data2);
-	  if(strval(data2) > 0) data2 = "vorrätig"; else data2 = "ausverkauft";
+	  cache_get_value_index("preis_normalarmor",data);
+	  cache_get_value_index("bestand_normalarmor",data2);
+	  if(strval(data2) > 0) data2 = "vorrÐ´tig"; else data2 = "ausverkauft";
 	  format(string,150,"Schutzweste: mittel (%i $) (%s) \n",strval(data),data2);
 	  strcat(output,string);
 	  
-	  mysql_fetch_field("preis_bigarmor",data);
-	  mysql_fetch_field("bestand_bigarmor",data2);
-	  if(strval(data2) > 0) data2 = "vorrätig"; else data2 = "ausverkauft";
+	  cache_get_value_index("preis_bigarmor",data);
+	  cache_get_value_index("bestand_bigarmor",data2);
+	  if(strval(data2) > 0) data2 = "vorrÐ´tig"; else data2 = "ausverkauft";
 	  format(string,150,"Schutzweste: schwer (%i $) (%s) \n",strval(data),data2);
 	  strcat(output,string);
 	  
@@ -1411,5 +1408,5 @@ public freiw_skinchange(playerid)
   {
     SetPlayerSkin(playerid,playerwaehltskin[playerid]);
   }
-  ShowPlayerDialog(playerid,1002,DIALOG_STYLE_MSGBOX , "Skinwechsel", "Möchten Sie diese Kleidung behalten?", "Ja, Kaufen", "Nein");
+  ShowPlayerDialog(playerid,1002,DIALOG_STYLE_MSGBOX , "Skinwechsel", "MÑ†chten Sie diese Kleidung behalten?", "Ja, Kaufen", "Nein");
 }
