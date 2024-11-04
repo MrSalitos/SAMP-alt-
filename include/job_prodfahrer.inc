@@ -165,7 +165,7 @@ public GetProdMission(playerid, zone[])
 	shopID[playerid] = strval(data);
 	mysql_fetch_field("preis_ek", data);
 	prod_ekpreis[playerid] = floatstr(data);
-	mysql_free_result();
+
 	printf("prod_ekpreis: %.2f", prod_ekpreis[playerid]);
 	if(bestand < 150 && prod_ekpreis[playerid] >= 0.5)
 	{

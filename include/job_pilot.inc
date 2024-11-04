@@ -745,7 +745,7 @@ public pilotstart(playerid)
         if(strval(data) > strval(data2) && start == 2) ziel = 0; else if(start == 2) ziel = 1;
         ftrans[(pilots[playerid]-5)][0] = start;
         ftrans[(pilots[playerid]-5)][1] = ziel;
-        mysql_free_result();
+        ;
         if(strval(data) > strval(data2) && start == 0)
           query = "UPDATE fprods SET destination1 = destination1 - 1000 WHERE pID=1";
         else if(start == 0)
@@ -765,7 +765,7 @@ public pilotstart(playerid)
         con = 0;
         GameTextForPlayer(playerid,"~w~ Nicht genug Pakete zum liefern!",3000,3);
         pilots[playerid] = 0;
-        mysql_free_result();
+        ;
       }
     }
     
@@ -1192,7 +1192,7 @@ public pilot_response(playerid, dialogid, response, listitem, inputtext[])
     mysql_store_result();
     mysql_fetch_row(data);
     mysql_fetch_field("cur_diesel",data);
-    mysql_free_result();
+    ;
     
     if(strval(data) < 3000 && (listitem == 0 || listitem == 1)) con = 2;
     else if(strval(data) < 800 && (listitem == 2 || listitem == 3)) con = 2;

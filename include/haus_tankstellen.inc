@@ -84,7 +84,7 @@ public GetCurrentGasStationInfo()
 		mysql_store_result();
 		mysql_fetch_row(data);
 		
-		mysql_free_result();
+	
 		i++;
 	}	  
 }
@@ -177,7 +177,7 @@ public TsBezahlen(playerid, ts_id)
 		mysql_fetch_field("vk_super", data);
 		vk_preis = floatstr(data);
 	}
-	mysql_free_result();
+
 	if(!giveusermoney(playerid, (floatround(vk_preis * menge)*-1)) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 	{
 		GameTextForPlayer(playerid, "~r~Zu wenig ~w~Geld zum Tanken", 3000, 3);

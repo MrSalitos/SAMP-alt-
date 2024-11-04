@@ -15,7 +15,7 @@ forward opengate(id);
 forward closegate(id);
 forward toropener(playerid);
 forward creategates();
-forward settime();
+forward haus_settime();
 forward uhrstellen();
 forward timerall30min();
 
@@ -321,7 +321,7 @@ public toropener(playerid)
 	{
 	  KillTimer(timerflugtor);
 	  opengate(1);
-	  timerflugtor = SetTimerEx("closegate",1000,false,"i",1);
+	  timerflugtor = haus_settimerEx("closegate",1000,false,"i",1);
 	}
   }
   if(playerdata[playerid][2] == 1 || playerdata[playerid][33] == 3)
@@ -330,19 +330,19 @@ public toropener(playerid)
 	{
 	  KillTimer(timerflugtor2);
 	  opengate(2);
-	  timerflugtor2 = SetTimerEx("closegate",1000,false,"i",2);
+	  timerflugtor2 = haus_settimerEx("closegate",1000,false,"i",2);
 	}
 	if(IsPlayerInRangeOfPoint(playerid, 8.5, -1250.57,  100.42,  6.61))
 	{
 	  KillTimer(timerflugtor3);
 	  opengate(3);
-	  timerflugtor3 = SetTimerEx("closegate",1000,false,"i",3);
+	  timerflugtor3 = haus_settimerEx("closegate",1000,false,"i",3);
 	}
 	if(IsPlayerInRangeOfPoint(playerid, 15, -76.36,  -353.71,  1.42))
 	{
 	  KillTimer(timertruckdepottor1);
 	  opengate(4);
-	  timertruckdepottor1 = SetTimerEx("closegate",1000,false,"i",4);
+	  timertruckdepottor1 = haus_settimerEx("closegate",1000,false,"i",4);
 	}
   }
   if(playerdata[playerid][2] == 2 || playerdata[playerid][33] == 3)
@@ -351,7 +351,7 @@ public toropener(playerid)
 	{
 	  KillTimer(timerpostdepottor1);
 	  opengate(5);
-	  timerpostdepottor1 = SetTimerEx("closegate",1000,false,"i",5);
+	  timerpostdepottor1 = haus_settimerEx("closegate",1000,false,"i",5);
 	}
   }
   if(playerdata[playerid][2] == 4 || playerdata[playerid][33] == 3)
@@ -360,49 +360,49 @@ public toropener(playerid)
 	{
 	  KillTimer(timerpolicelspdtor1);
 	  opengate(6);
-	  timerpolicelspdtor1 = SetTimerEx("closegate",1000,false,"i",6);
+	  timerpolicelspdtor1 = haus_settimerEx("closegate",1000,false,"i",6);
 	}
 	if(IsPlayerInRangeOfPoint(playerid, 9.5, 1588.5,  -1637.78,  14.5))
 	{
 	  KillTimer(timerpolicelspdtor2);
 	  opengate(7);
-	  timerpolicelspdtor2 = SetTimerEx("closegate",1000,false,"i",7);
+	  timerpolicelspdtor2 = haus_settimerEx("closegate",1000,false,"i",7);
 	}
 	if(IsPlayerInRangeOfPoint(playerid, 13, -1633,  688.07,  8.7))
 	{
 	  KillTimer(timerpolicesfpdtor2);
 	  opengate(8);
-	  timerpolicesfpdtor2 = SetTimerEx("closegate",1000,false,"i",8);
+	  timerpolicesfpdtor2 = haus_settimerEx("closegate",1000,false,"i",8);
 	}
 	if(IsPlayerInRangeOfPoint(playerid, 9.5, -1572,  660,  7))
 	{
 	  KillTimer(timerpolicesfpdtor1);
 	  opengate(9);
-	  timerpolicesfpdtor1 = SetTimerEx("closegate",1000,false,"i",9);
+	  timerpolicesfpdtor1 = haus_settimerEx("closegate",1000,false,"i",9);
 	}
 	if(IsPlayerInRangeOfPoint(playerid, 9.5, 2293.94, 2497.5,  4.8))
 	{
 	  KillTimer(timerpolicelvpdtor2);
 	  opengate(10);
-	  timerpolicelvpdtor2 = SetTimerEx("closegate",1000,false,"i",10);
+	  timerpolicelvpdtor2 = haus_settimerEx("closegate",1000,false,"i",10);
 	}
 	if(IsPlayerInRangeOfPoint(playerid, 9.5, 2238.2, 2450.2,  10.7))
 	{
 	  KillTimer(timerpolicelvpdtor1);
 	  opengate(11);
-	  timerpolicelvpdtor1 = SetTimerEx("closegate",1000,false,"i",11);
+	  timerpolicelvpdtor1 = haus_settimerEx("closegate",1000,false,"i",11);
 	}
 	if(IsPlayerInRangeOfPoint(playerid, 8.5, 2335.56,  2444.72,  7.55))
 	{
 	  KillTimer(timerpolicelvpdtor3);
 	  opengate(12);
-	  timerpolicelvpdtor3 = SetTimerEx("closegate",1000,false,"i",12);
+	  timerpolicelvpdtor3 = haus_settimerEx("closegate",1000,false,"i",12);
 	}
 	if(IsPlayerInRangeOfPoint(playerid, 8.5, -1701.43,  687.8,  24.7))
 	{
 	  KillTimer(timerpolicesfpdtor3);
 	  opengate(13);
-	  timerpolicesfpdtor3 = SetTimerEx("closegate",1000,false,"i",13);
+	  timerpolicesfpdtor3 = haus_settimerEx("closegate",1000,false,"i",13);
 	}
   }
   if(playerdata[playerid][33] > 0)
@@ -411,7 +411,7 @@ public toropener(playerid)
 	{
 	  KillTimer(timervipgateplesure);
 	  opengate(14);
-	  timervipgateplesure = SetTimerEx("closegate",1000,false,"i",14);
+	  timervipgateplesure = haus_settimerEx("closegate",1000,false,"i",14);
 	}
   }
   if(GetPlayerVehicleID(playerid))
@@ -516,28 +516,28 @@ public toropener(playerid)
 	}
 
 }
-public settime()
+public haus_settime()
 {
-  new Hour, Minute,Seconds, output[10];
-  gettime(Hour,Minute,Seconds);
-  format(output,10,"%02d:%02d", Hour, Minute);
-  SetWorldTime(Hour);
-  if(Minute == 0 || Minute == 30) timerall30min();
-  if(Hour == 0) pbote_add();
-  TextDrawSetString(zeitanzeigen,output);
+	new haus_hour, haus_minute, haus_second, output[10];
+	gettime(haus_hour, haus_minute, haus_second);
+	format(output,10,"%02d:%02d", haus_hour, haus_minute);
+	SetWorldTime(haus_hour);
+	if(haus_minute == 0 || haus_minute == 30) timerall30min();
+	if(haus_hour == 0) pbote_add();
+	TextDrawSetString(zeitanzeigen,output);
 }
 public uhrstellen()
 {
-  new Hour, Minute,Seconds;
-  gettime(Hour, Minute,Seconds);
-  if(Seconds != 0)
+  new haus_hour, haus_minute,haus_second;
+  gettime(haus_hour, haus_minute, haus_second);
+  if(haus_second != 0)
   {
-	settime(Hour,Minute,Seconds);
-	SetTimer("uhrstellen",(60 - Seconds)*1000,false);
+	haus_settime(haus_hour, haus_minute, haus_second);
+	haus_settimer("uhrstellen",(60 - haus_second)*1000,false);
   }
   else
   {
-	SetTimer("settime",60000,true);
+	haus_settimer("haus_settime",60000,true);
   }
 }
 public timerall30min()

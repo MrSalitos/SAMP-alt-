@@ -83,7 +83,7 @@ public userhaus()
     mysql_query(query);
     mysql_store_result();
     mysql_fetch_field("anz",data);
-    mysql_free_result();
+    ;
     if(strval(data) < floatround(userhaeuser[i][8]))
     {
       haeuserpickups[i] = CreatePickup(1273, 1, userhaeuser[i][0], userhaeuser[i][1], userhaeuser[i][2], -1);

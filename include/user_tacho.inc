@@ -43,7 +43,7 @@ public load_cars()
     mysql_fetch_field("lizenz",data);
     Fahrzeugdaten[i][2] = strval(data);
   }
-  mysql_free_result();
+  ;
   return 1;
 }
 

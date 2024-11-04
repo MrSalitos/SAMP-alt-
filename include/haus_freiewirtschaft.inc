@@ -239,7 +239,7 @@ public burgershot()
     shopsleavingpick[i] = CreatePickup(1559,1,shopsinter[i][4], shopsinter[i][5], shopsinter[i][6],-1);
     shopssellingpick[i] = CreatePickup(1239,1,shopsinter[i][1], shopsinter[i][2], shopsinter[i][3],-1);
   }
-  mysql_free_result();
+  ;
 }
 
 public essen(playerid, listitem, bsID)
@@ -808,7 +808,7 @@ public essen(playerid, listitem, bsID)
     }
   }
   
-  mysql_free_result();
+  ;
 }
 
 public freiew_response(playerid, dialogid, response, listitem, inputtext[])
@@ -838,7 +838,7 @@ public freiew_response(playerid, dialogid, response, listitem, inputtext[])
           playerdata[playerid][70]++;
         }
       }
-      mysql_free_result();
+      ;
     }
     SetPlayerSkin(playerid, playerdata[playerid][1]);
     playerwaehltskin[playerid] = -1;
@@ -916,7 +916,7 @@ public freiew_response(playerid, dialogid, response, listitem, inputtext[])
 	  mysql_fetch_field("bestand_bigarmor",data2);
       data3 = "bestand_bigarmor";
     }
-    mysql_free_result();
+    ;
     
     
     if(strval(data2) > 0 && listitem < 6)
@@ -1251,7 +1251,7 @@ public freiew_pickups(playerid,pickupid)
         format(string,150,"{FF0000}Geschäft ausverkauft.\n");
       strcat(output,string);
       
-      mysql_free_result();
+      ;
       
       if(i < 1) headline = "Burgershot Speisekarte";
       else if(i < 2) headline = "Cluckin' bell Speisekarte";
@@ -1331,7 +1331,7 @@ public freiew_pickups(playerid,pickupid)
 	  format(string,150,"Schutzweste: schwer (%i $) (%s) \n",strval(data),data2);
 	  strcat(output,string);
 	  
-	  mysql_free_result();
+	  ;
       ShowPlayerDialog(playerid,1003,DIALOG_STYLE_LIST , "Ammu-Nation Aushang", output, "Kaufen", "Abbrechen");
     }
   }

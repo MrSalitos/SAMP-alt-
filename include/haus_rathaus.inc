@@ -64,7 +64,7 @@ public jobmenu(playerid)
     mysql_fetch_field("jname",dataname);
     mysql_fetch_field("anzstellen",datastellmax);
     mysql_fetch_field("cnt",datastellmin);
-    mysql_free_result();
+    ;
     if((strval(datastellmax)-strval(datastellmin)) > 0) k = strval(datastellmax)-strval(datastellmin); else k = 0;
     format(output2,50,"%s (%i frei) \n",dataname,k);
     strcat(output,output2);
@@ -104,7 +104,7 @@ public deljob(playerid)
 	mysql_store_result();
 	mysql_fetch_row(data);
 	mysql_fetch_field("time",data);
-	mysql_free_result();
+
 	if(strval(data) < 86400)
 	  SendClientMessage(playerid,COLOR_YELLOW,"Sie haben noch keine 24h in ihrem Beruf gearbeitet.");
 	else
@@ -200,13 +200,13 @@ public checkjob(playerid,i)
       mysql_fetch_row(data);
       mysql_fetch_field("anzstellen",data3);
       mysql_fetch_field("jName",output);
-      mysql_free_result();
+      ;
       format(query, sizeof(query), "SELECT COUNT(*) as anz FROM `accounts` WHERE jobid=%i",i);
       mysql_query(query);
       mysql_store_result();
       mysql_fetch_row(data);
       mysql_fetch_field("anz",anz);
-      mysql_free_result();
+      ;
       if(strval(data3) > strval(anz))
       {
         setuserjob(playerid,i);

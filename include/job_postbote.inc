@@ -213,7 +213,7 @@ public start_pbroute(playerid)
   mysql_store_result();
   mysql_fetch_row(data);
   mysql_fetch_field("anz",data);
-  mysql_free_result();
+  ;
   if(strval(data) > 0)
   {
 	new j;
@@ -233,7 +233,7 @@ public start_pbroute(playerid)
 	  if(strval(data) == 2) strcat(string,"\nExpress (250$)");
 	  if(strval(data) == 3) strcat(string,"\nExpress (150$)");
 	  if(strval(data) == 4) strcat(string,"\nExpress (300$)");
-	  mysql_free_result();
+	  ;
 	}
   }
   format(string1,100,"Postbote (Erfahrung: %i ): Strecke wählen",playerdata[playerid][3]);

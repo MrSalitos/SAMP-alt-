@@ -200,7 +200,7 @@ public GetRaffinerieMission(playerid)
 	max_amount[playerid] = strval(data);
 	mysql_fetch_field("lager", data);
 	lager[playerid] = strval(data);
-	mysql_free_result();
+
 	ts_mission_id[playerid] = 70;
 	if(max_amount[playerid] > 99000)
 	{ 
@@ -232,7 +232,7 @@ public GetImportMission(playerid)
 	max_amount[playerid] = strval(data);
 	mysql_fetch_field("lager", data);
 	lager[playerid] = strval(data);
-	mysql_free_result();
+
 	ts_mission_id[playerid] = 80;
 	if(max_amount[playerid] > 99000)
 	{ 
@@ -264,7 +264,7 @@ public GetFischMission(playerid)
 	max_amount[playerid] = strval(data);
 	mysql_fetch_field("lager", data);
 	lager[playerid] = strval(data);
-	mysql_free_result();
+
 	ts_mission_id[playerid] = 90;
 	if(max_amount[playerid] > 99000)
 	{ 
@@ -296,7 +296,7 @@ public GetProdLSMission(playerid)
 	max_amount[playerid] = strval(data);
 	mysql_fetch_field("lager", data);
 	lager[playerid] = strval(data);
-	mysql_free_result();
+
 	ts_mission_id[playerid] = 90;
 	if(max_amount[playerid] > 99000)
 	{ 
@@ -328,7 +328,7 @@ public GetProdSFMission(playerid)
 	max_amount[playerid] = strval(data);
 	mysql_fetch_field("lager", data);
 	lager[playerid] = strval(data);
-	mysql_free_result();
+
 	ts_mission_id[playerid] = 90;
 	if(max_amount[playerid] > 99000)
 	{ 
@@ -360,7 +360,7 @@ public GetProdLVMission(playerid)
 	max_amount[playerid] = strval(data);
 	mysql_fetch_field("lager", data);
 	lager[playerid] = strval(data);
-	mysql_free_result();
+
 	ts_mission_id[playerid] = 90;
 	if(max_amount[playerid] > 99000)
 	{ 
@@ -392,7 +392,7 @@ public GetTsMission(playerid)
 		ts_bedarf = strval(data);
 		mysql_fetch_field("ts_id", data);
 		ts_mission_id[playerid] = strval(data);
-		mysql_free_result();
+	
 		if(ts_bedarf > 2000)
 		{ 
 			format(output,100,"*** %s benötigt %i Liter Kraftstoff. ***", ts_name, ts_bedarf);

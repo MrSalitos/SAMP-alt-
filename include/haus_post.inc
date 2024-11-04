@@ -45,7 +45,7 @@ public sendpost(playerid,row)
   mysql_store_result();
   mysql_fetch_row(data);
   mysql_fetch_field("anz",data);
-  mysql_free_result();
+  ;
   if(strval(data) > 0)
   {
 	ShowPlayerDialog(playerid, 100,DIALOG_STYLE_INPUT , "Text für die Werbung", "Gebe hier deinen Text für die Werbung ein (Absender und Telefonnummer werden automatisch hinzugefügt):", "Bestätigen", "Abbrechen");

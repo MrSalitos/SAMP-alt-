@@ -573,7 +573,7 @@ public show_automsg(playerid,kind,vid,km,price)
   mysql_query(string);
   mysql_store_result();
   mysql_fetch_field("anz",string);
-  mysql_free_result();
+  ;
   
   if(playerdata[playerid][56] == 0 && strval(string) < 3 && kind < 3)
     ShowPlayerDialog(playerid, id,DIALOG_STYLE_MSGBOX,headline,output,"Kaufen","Aussteigen");
@@ -779,7 +779,7 @@ public auto_response(playerid, dialogid, response, listitem, inputtext[])
       }
       if(strlen(output) < 3) output = "Sie haben kein Fahrzeug zum Versichern";
       ShowPlayerDialog(playerid, id, DIALOG_STYLE_LIST, "Autoversicherung beantragen", output, "Versichern", "Abbrechen");
-      mysql_free_result();
+      ;
     }
     else if(listitem == 1)
     {
@@ -805,7 +805,7 @@ public auto_response(playerid, dialogid, response, listitem, inputtext[])
       }
       if(strlen(output) < 3) output = "Sie haben kein Fahrzeug was bei der Versicherung steht.";
       ShowPlayerDialog(playerid, id, DIALOG_STYLE_LIST, "Autoversicherung in Anspruch nehmen", output, "Bezahlen", "Abbrechen");
-      mysql_free_result();
+      ;
     }
     else
     {
@@ -824,7 +824,7 @@ public auto_response(playerid, dialogid, response, listitem, inputtext[])
       }
       if(strlen(output) < 3) output = "Sie haben kein Fahrzeug versichert.";
       ShowPlayerDialog(playerid, id, DIALOG_STYLE_LIST, "Autoversicherung kündigen", output, "Kündigen", "Abbrechen");
-      mysql_free_result();
+      ;
     }
   }
   if(dialogid == 81)
@@ -837,7 +837,7 @@ public auto_response(playerid, dialogid, response, listitem, inputtext[])
       mysql_query(query);
       mysql_store_result();
       mysql_fetch_field("id",data);
-      mysql_free_result();
+      ;
       format(query,150,"UPDATE user_vehicles SET vers = 1 WHERE id = %i ORDER BY id",strval(data));
       mysql_query(query);
       GameTextForPlayer(playerid, "~w~Sie haben ihr Auto versichert.", 3000, 3);
@@ -965,7 +965,7 @@ public auto_response(playerid, dialogid, response, listitem, inputtext[])
         }
         else GameTextForPlayer(playerid,"~r~Sie haben nicht genug Geld.",3000,3);
       }
-      mysql_free_result();
+      ;
       if(ok == 1) mysql_query(query);
     }
     else
@@ -980,7 +980,7 @@ public auto_response(playerid, dialogid, response, listitem, inputtext[])
       mysql_query(query2);
       mysql_store_result();
       mysql_fetch_field("id",data2);
-      mysql_free_result();
+      ;
       format(query2,150,"UPDATE user_vehicles SET vers = 0 WHERE id = %i ORDER BY id",strval(data2));
       mysql_query(query2);
       GameTextForPlayer(playerid, "~w~Sie haben keine Autoversicherung mehr.", 3000, 3);
@@ -1013,7 +1013,7 @@ public auto_response(playerid, dialogid, response, listitem, inputtext[])
 	mysql_fetch_field("vid",data);
 	userchangeschild[playerid] = strval(data);
     mysql_fetch_field("schild",data);
-    mysql_free_result();
+    ;
 	format(output,250,"Sie können das Schild ihres Wagens beliebig verändern. \nBedenken Sie die maximal Länge von 10 Zeichen!\nDas Aktuelle lautet: %s\n Eine Änderung kostet sie 50 $!",data);
 	ShowPlayerDialog(playerid, 91, DIALOG_STYLE_INPUT, "Kennzeichen verändern von", output, "Ändern", "Abbrechen");
   }
@@ -1096,7 +1096,7 @@ public loadplayercars()
       Fahrzeuge[j][5] = 0;
     }
   }
-  mysql_free_result();
+  ;
   return 1;
 }
 
@@ -1141,7 +1141,7 @@ public loadplayercarsforplayer(accid)
       Fahrzeuge[j][5] = 0;
     }
   }
-  mysql_free_result();
+  ;
   return 1;
 }
 
@@ -1303,7 +1303,7 @@ public auto_pickup(playerid,pickupid)
     }
     if(strlen(output) < 3) output = "Sie haben kein Fahrzeug zum ändern des Kennzeichens";
     ShowPlayerDialog(playerid, id, DIALOG_STYLE_LIST, "Kennzeichen verändern von", output, "Ändern", "Abbrechen");
-    mysql_free_result();
+    ;
 	SetPlayerPos(playerid,376.36, 187.95, 1014.18);
   }
 }
