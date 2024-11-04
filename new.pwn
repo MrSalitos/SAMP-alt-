@@ -4,11 +4,14 @@ new MySQL:g_sql;
 #include <streamer>
 #include <define_color>
 #include <user>
-#include <haus>
+// #include <haus>
+#include <haus_freiewirtschaft>
+#include <haus_autohaus>
 #include <job>
 #include <fraktion>
 #include <user_hilfe>
 #include <user_navi>
+
 
 new timer1[MAX_PLAYERS],timer3[MAX_PLAYERS];
 
@@ -77,14 +80,13 @@ public OnPlayerConnect(playerid)
 {
   new data[256], query[128], pname[MAX_PLAYER_NAME];
   TogglePlayerSpectating(playerid, 1);
-  //Hier noch verschiedene Orte
   //Noch Spam schutz
   //DoppelIP check mit doppelip erlaubnis
   GetPlayerName(playerid, pname, MAX_PLAYER_NAME);
   mysql_real_escape_string(pname,pname);
   format(query, sizeof(query), "SELECT online,COUNT(*) as anz FROM `accounts` WHERE `accname`='%s'", pname);
   mysql_query(query);
-  mysql_store_result();
+  mysql_store_result(MySQL:g_sql)();
   mysql_fetch_row(data);
   mysql_fetch_field("anz",data);
   if(strval(data) > 0)
@@ -97,7 +99,7 @@ public OnPlayerConnect(playerid)
   }
   else
     ShowPlayerDialog(playerid, 1,DIALOG_STYLE_MSGBOX , "Willkommen:", "Auf unserem deutschen Roleplay Server.\nDein Account ist nicht registriert, um einen Account anzulegen klicke auf Registrieren.", "Registrieren", "Abbrechen");
-  mysql_free_result();
+  ;
   SetPlayerColor(playerid,COLOR_WHITE);
   return 1;
 }
